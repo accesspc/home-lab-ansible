@@ -1,7 +1,17 @@
 ---
 
-- name: Common
+- name: Common - APT
   hosts: all
   roles:
     - common/apt
-    - common/bash
+  tags:
+    - commont
+    - apt
+
+- name: Common - User
+  hosts: k8s
+  roles:
+    - common/user
+  tags:
+    - common
+    - user

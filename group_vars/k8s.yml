@@ -4,6 +4,9 @@ ansible_become: true
 ansible_become_method: sudo
 ansible_user: robertas
 
+common_extra_pkgs:
+  - nfs-common
+
 # https://github.com/projectcalico/calico/releases
 k8s_addons:
   calico: v3.27.0

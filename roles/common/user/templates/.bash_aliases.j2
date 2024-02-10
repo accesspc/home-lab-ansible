@@ -1,0 +1,8 @@
+# ~/.bash_aliases
+
+alias la='ls -alF'
+
+{% if 'k8s' in group_names %}
+source <(kubeadm completion bash)
+source <(kubectl completion bash)
+{% endif %}
