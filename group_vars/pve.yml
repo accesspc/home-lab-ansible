@@ -1,0 +1,24 @@
+---
+
+# common
+common_extra_pkgs:
+  - python3-certbot-dns-route53
+
+nfs:
+  - name: grafana
+    net: 192.168.68.0/24
+    mode: "0755"
+    owner: 472
+    group: nogroup
+
+  - name: prometheus
+    net: 192.168.68.0/24
+    mode: "0755"
+    owner: nobody
+    group: nogroup
+
+  - name: wcac
+    net: 192.168.68.0/24
+    mode: "0755"
+    owner: nobody
+    group: nogroup

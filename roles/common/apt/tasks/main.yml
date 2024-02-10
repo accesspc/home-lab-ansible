@@ -1,5 +1,10 @@
 ---
 
+- name: apt - pve
+  import_tasks:
+    pve.yml
+  when: "'pve' in group_names"
+
 - name: apt - update && dist-upgrade
   apt:
     update_cache: true

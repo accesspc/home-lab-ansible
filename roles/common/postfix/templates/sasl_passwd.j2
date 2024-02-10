@@ -1,0 +1,1 @@
+[{{ lookup('ansible.builtin.env', 'AWS_SES_HOST') }}]:587 {{ lookup('ansible.builtin.env', 'ANS_SES_ACCESS') }}:{{ lookup('ansible.builtin.env', 'ANS_SES_SECRET') }}

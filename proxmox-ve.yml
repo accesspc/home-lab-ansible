@@ -1,0 +1,16 @@
+---
+
+- name: PVE - Postfix relay
+  hosts: pve
+  roles:
+    - common/postfix
+  tags:
+    - email
+    - postfix
+
+- name: PVE - NFS server
+  hosts: pve
+  roles:
+    - common/nfs
+  tags:
+    - nfs
