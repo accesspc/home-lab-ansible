@@ -69,7 +69,7 @@ Has 3 groups in it:
 Update packages to the latest version, add some bash aliases and bash completion for kubeadm and kubectl
 
 ```bash
-ansible-playbook -i inventories/lab.yml common.all.yml
+ansible-playbook -i inventories/k8s.yml common.all.yml
 ```
 
 #### k8s.yml - setup
@@ -86,7 +86,7 @@ Run initial setup steps to prepare nodes:
 * REBOOT
 
 ```bash
-ansible-playbook -i inventories/lab.yml k8s.yml -t setup
+ansible-playbook -i inventories/k8s.yml k8s.yml -t setup
 ```
 
 #### k8s.yml - init
@@ -94,7 +94,7 @@ ansible-playbook -i inventories/lab.yml k8s.yml -t setup
 Initialize K8s cluster:
 
 ```bash
-ansible-playbook -i inventories/lab.yml k8s.yml -t init
+ansible-playbook -i inventories/k8s.yml k8s.yml -t init
 ```
 
 #### k8s.yml - join
@@ -102,5 +102,5 @@ ansible-playbook -i inventories/lab.yml k8s.yml -t init
 Join worker nodes to the K8s cluster:
 
 ```bash
-ansible-playbook -i inventories/lab.yml k8s.yml -t join
+ansible-playbook -i inventories/k8s.yml k8s.yml -t join
 ```
