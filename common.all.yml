@@ -9,7 +9,7 @@
     - apt
 
 - name: Common - User
-  hosts: k8s
+  hosts: all
   roles:
     - common/user
   tags:
