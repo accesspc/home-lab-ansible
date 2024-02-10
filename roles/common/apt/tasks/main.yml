@@ -1,0 +1,23 @@
+---
+
+- name: apt - update && dist-upgrade
+  apt:
+    update_cache: true
+    upgrade: dist
+    force: true
+
+- name: apt - common packages
+  apt:
+    name: "{{ common_apt_pkgs }}"
+    state: present
+
+- name: apt - common extra packages
+  apt:
+    name: "{{ common_extra_pkgs }}"
+    state: present
+  when: common_extra_pkgs is defined
+
+- name: apt - remove obsolete packages
+  apt:
+    autoremove: true
+    purge: true

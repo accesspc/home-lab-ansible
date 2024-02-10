@@ -1,0 +1,56 @@
+---
+
+# Cluster INIT
+- name: shell - kubeadm init --pod-network-cidr {{ k8s_network_cidr }} --kubernetes-version {{ k8s_version }}
+  shell: kubeadm init --pod-network-cidr {{ k8s_network_cidr }} --kubernetes-version {{ k8s_version }}
+  register: kubeadm_init_output
+
+- debug: msg="{{ kubeadm_init_output.stdout_lines }}"
+
+- debug: msg="{{ kubeadm_init_output.stderr_lines }}"
+
+- name: file - touch /root/.state.cluster.init
+  file:
+    path: /root/.state.cluster.init
+    state: touch
+
+# root
+- name: file - /root/.kube
+  file:
+    path: /root/.kube
+    state: directory
+
+- name: copy - /etc/kubernetes/admin.conf /root/.kube/config
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /root/.kube/config
+    mode: 0600
+    remote_src: true
+
+# ansible_user
+- name: file - /home/{{ ansible_user }}/.kube
+  file:
+    path: /home/{{ ansible_user }}/.kube
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+- name: copy - /etc/kubernetes/admin.conf /home/{{ ansible_user }}/.kube/config
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/{{ ansible_user }}/.kube/config
+    remote_src: true
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0600
+
+# Pause to become ready
+- name: pause - 15s
+  pause:
+    seconds: 15
+
+# Calico CNI
+- name: shell - kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s_addons.calico }}/manifests/calico.yaml
+  shell: kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s_addons.calico }}/manifests/calico.yaml
+  vars:
+    ansible_become: false

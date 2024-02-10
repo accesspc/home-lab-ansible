@@ -1,0 +1,59 @@
+---
+
+# Reset
+- name: Reset K8s node/cluster
+  import_tasks:
+    reset.yml
+  tags:
+    - never
+    - reset
+
+# check state file
+- name: stat - /root/.state.cluster.setup
+  stat:
+    path: /root/.state.cluster.setup
+  register: cluster_setup
+  tags:
+    - containerd
+    - k8s
+    - system
+
+# System prep
+- name: System preparation
+  import_tasks:
+    system.yml
+  tags:
+    - system
+
+# Install containerd.io
+- name: Intall containerd.io
+  import_tasks:
+    containerd.yml
+  tags:
+    - containerd
+
+# Reboot, if first time running
+- name: reboot
+  reboot: {}
+  when: not cluster_setup.stat.exists
+
+# Install K8s
+- name: Intall k8s
+  import_tasks:
+    k8s.yml
+  tags:
+    - k8s
+
+# Install Helm
+- name: Intall helm
+  import_tasks:
+    helm.yml
+  tags:
+    - helm
+  when: "'control' in group_names"
+
+# touch state file
+- name: file - touch /root/.state.cluster.setup
+  file:
+    path: /root/.state.cluster.setup
+    state: touch

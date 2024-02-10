@@ -1,0 +1,21 @@
+---
+
+# Kernel modules
+- name: copy - /etc/modules-load.d/containerd.conf
+  copy:
+    src: etc/modules-load.d/containerd.conf
+    dest: /etc/modules-load.d/containerd.conf
+
+# Sysctl config
+- name: copy - /etc/sysctl.d/99-kubernetes-cri.conf
+  copy:
+    src: etc/sysctl.d/99-kubernetes-cri.conf
+    dest: /etc/sysctl.d/99-kubernetes-cri.conf
+
+# Swap off
+- name: lineinfile - .*swap.*
+  lineinfile:
+    path: /etc/fstab
+    regex: '^#?(.*swap.*)'
+    line: '#\1'
+    backrefs: true

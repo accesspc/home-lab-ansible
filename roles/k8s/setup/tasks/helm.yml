@@ -1,0 +1,28 @@
+---
+
+- name: get_url - helm key
+  get_url:
+    url: https://baltocdn.com/helm/signing.asc
+    dest: /tmp/helm.asc
+
+- name: shell - gpg dearmor
+  shell: cat /tmp/helm.asc | gpg --dearmor > /usr/share/keyrings/helm.gpg
+
+- name: apt_repository - helm
+  apt_repository:
+    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main
+    filename: kubernetes
+    state: present
+
+- name: apt - helm packages
+  apt:
+    pkg:
+      - helm
+    state: present
+    update_cache: true
+
+- name: shell - helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  shell: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+- name: shell - helm repo update
+  shell: helm repo update

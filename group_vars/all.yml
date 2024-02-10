@@ -1,0 +1,13 @@
+---
+
+ansible_ssh_common_args: '-o StrictHostKeyChecking=accept-new'
+
+# common
+common_apt_pkgs:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - nfs-common
+  - prometheus-node-exporter
+  - vim-nox
