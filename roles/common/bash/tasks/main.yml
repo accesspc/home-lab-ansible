@@ -1,0 +1,30 @@
+---
+
+# Root
+- name: lineinfile - /root/.bashrc - alias la
+  lineinfile:
+    path: /root/.bashrc
+    regex: '^alias la.*'
+    line: alias la="ls -alF"
+
+- name: lineinfile - /root/.bashrc - kubeadm completion
+  lineinfile:
+    path: /root/.bashrc
+    line: source <(kubeadm completion bash)
+
+# ansible_user
+- name: lineinfile - /home/{{ ansible_user }}/.bashrc - alias la
+  lineinfile:
+    path: /home/{{ ansible_user }}/.bashrc
+    regex: '^alias la.*'
+    line: alias la="ls -alF"
+
+- name: lineinfile - /home/{{ ansible_user }}/.bashrc - kubeadm completion
+  lineinfile:
+    path: /home/{{ ansible_user }}/.bashrc
+    line: source <(kubeadm completion bash)
+
+- name: lineinfile - /home/{{ ansible_user }}/.bashrc - kubectl completion
+  lineinfile:
+    path: /home/{{ ansible_user }}/.bashrc
+    line: source <(kubectl completion bash)

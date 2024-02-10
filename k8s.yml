@@ -1,0 +1,25 @@
+---
+
+- name: Common
+  hosts: k8s
+  roles:
+    - k8s/setup
+  tags:
+    - k8s
+    - setup
+
+- name: K8s init
+  hosts: control
+  roles:
+    - k8s/init
+  tags:
+    - init
+    - k8s
+
+- name: K8s join
+  hosts: k8s
+  roles:
+    - k8s/join
+  tags:
+    - join
+    - k8s

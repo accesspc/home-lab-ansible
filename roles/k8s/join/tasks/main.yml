@@ -1,0 +1,41 @@
+---
+
+# check state file
+- name: stat - /root/.state.cluster.joined
+  stat:
+    path: /root/.state.cluster.joined
+  register: cluster_joined
+  when: "'worker' in group_names"
+
+# Get join token
+- name: shell - kubeadm token create --print-join-command
+  shell: kubeadm token create --print-join-command
+  register: cluster_join_command
+  when: "'control' in group_names"
+
+# Display join command
+- debug: msg="{{ cluster_join_command.stdout }}"
+  when: "'control' in group_names"
+
+- debug: msg="{{ hostvars['k8s-control'].cluster_join_command.stdout }}"
+  when: "'worker' in group_names"
+
+# Join worker nodes
+- name: shell - kubeadm join ...
+  shell: "{{ hostvars['k8s-control'].cluster_join_command.stdout }}"
+  register: worker_join_output
+  when: "'worker' in group_names"
+
+# Display join command output
+- debug: msg="{{ worker_join_output.stdout_lines }}"
+  when: "'worker' in group_names"
+
+- debug: msg="{{ worker_join_output.stderr_lines }}"
+  when: "'worker' in group_names"
+
+# touch state file
+- name: file - touch /root/.state.cluster.joined
+  file:
+    path: /root/.state.cluster.joined
+    state: touch
+  when: "'worker' in group_names"

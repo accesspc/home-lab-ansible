@@ -1,0 +1,20 @@
+---
+
+# check state file
+- name: stat - /root/.state.cluster.init
+  stat:
+    path: /root/.state.cluster.init
+  register: cluster_init
+
+# Init cluster
+- name: K8s Cluster Init
+  import_tasks:
+    cluster.init.yml
+  when: not cluster_init.stat.exists
+
+# get nodes
+- name: shell - kubectl get nodes
+  shell: kubectl get nodes
+  register: nodes
+
+- debug: msg={{ nodes.stdout_lines }}

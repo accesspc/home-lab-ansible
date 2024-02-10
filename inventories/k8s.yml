@@ -1,0 +1,25 @@
+---
+
+all:
+  hosts:
+    k8s-control:
+      ansible_host: 192.168.68.16
+    k8s-worker1:
+      ansible_host: 192.168.68.17
+    k8s-worker2:
+      ansible_host: 192.168.68.18
+
+control:
+  hosts:
+    k8s-control:
+
+k8s:
+  hosts:
+    k8s-control:
+    k8s-worker1:
+    k8s-worker2:
+
+worker:
+  hosts:
+    k8s-worker1:
+    k8s-worker2:
