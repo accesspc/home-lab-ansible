@@ -1,0 +1,39 @@
+---
+
+all:
+  hosts:
+    bl1:
+      ansible_host: 192.168.68.2
+    fh01:
+      ansible_host: 77.68.30.113
+    fw01:
+      ansible_host: 192.168.68.11
+    rr-vpn:
+      ansible_host: 13.41.117.97
+    rr-web:
+      ansible_host: 18.169.61.23
+
+aws:
+  hosts:
+    rr-vpn:
+    rr-web:
+
+debian:
+  hosts:
+    bl1:
+    fh01:
+    fw01:
+
+firewall:
+  hosts:
+    fw01:
+
+pve:
+  hosts:
+    bl1:
+
+tsgw:
+  hosts:
+    bl1:
+    fh01:
+    fw01:

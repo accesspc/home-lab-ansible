@@ -8,6 +8,8 @@ common_apt_pkgs:
   - ca-certificates
   - curl
   - gnupg
+  - iperf3
   - nfs-common
   - prometheus-node-exporter
+  - speedtest-cli
   - vim-nox

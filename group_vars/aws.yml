@@ -1,0 +1,6 @@
+---
+
+ansible_become: true
+ansible_become_method: sudo
+ansible_ssh_private_key_file: ~/.ssh/rr10-0-eu-west-2
+ansible_user: ubuntu
