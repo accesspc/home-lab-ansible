@@ -2,21 +2,21 @@
 
 - name: get_url - k8s key
   get_url:
-    url: https://pkgs.k8s.io/core:/stable:/v{{ k8s_release }}/deb/Release.key
+    url: https://pkgs.k8s.io/core:/stable:/v{{ k8s.release }}/deb/Release.key
     dest: /etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc
 
 - name: apt_repository - k8s
   apt_repository:
-    repo: deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v{{ k8s_release }}/deb/ /
+    repo: deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v{{ k8s.release }}/deb/ /
     filename: kubernetes
     state: present
 
 - name: apt - k8s packages
   apt:
     pkg:
-      - kubeadm={{ k8s_apt_version }}
-      - kubectl={{ k8s_apt_version }}
-      - kubelet={{ k8s_apt_version }}
+      - kubeadm={{ k8s.apt_version }}
+      - kubectl={{ k8s.apt_version }}
+      - kubelet={{ k8s.apt_version }}
     state: present
     update_cache: true
 

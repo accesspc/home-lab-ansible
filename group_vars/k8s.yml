@@ -7,11 +7,14 @@ ansible_user: robertas
 common_extra_pkgs:
   - nfs-common
 
-# https://github.com/projectcalico/calico/releases
-k8s_addons:
-  calico: v3.27.0
+k8s:
+  addons:
+    # https://github.com/projectcalico/calico/releases
+    calico: v3.27.2
 
-k8s_release: 1.29
-k8s_version: "{{ k8s_release }}.1"
-k8s_apt_version: "{{ k8s_version }}-1.1"
-k8s_network_cidr: 10.32.0.0/16
+  network_cidr: 10.32.0.0/16
+
+  # https://kubernetes.io/releases/
+  release: 1.29
+  version: 1.29.2
+  apt_version: 1.29.2-1.1

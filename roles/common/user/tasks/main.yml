@@ -27,4 +27,4 @@
     mode: 0600
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-  when: "'k8s' in group_names"
+  when: "ansible_user != 'root'"
