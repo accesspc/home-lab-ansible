@@ -24,6 +24,7 @@
     system.yml
   tags:
     - system
+  when: not cluster_setup.stat.exists
 
 # Install containerd.io
 - name: Intall containerd.io
@@ -31,6 +32,7 @@
     containerd.yml
   tags:
     - containerd
+  when: not cluster_setup.stat.exists
 
 # Reboot, if first time running
 - name: reboot
