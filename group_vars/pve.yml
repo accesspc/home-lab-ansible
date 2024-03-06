@@ -2,8 +2,6 @@
 
 # common
 common_extra_pkgs:
-  - prometheus-postfix-exporter
-  - prometheus-process-exporter
   - python3-certbot-dns-route53
 
 nfs:
