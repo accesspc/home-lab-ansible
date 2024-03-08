@@ -19,3 +19,8 @@
     regex: '^#?(.*swap.*)'
     line: '#\1'
     backrefs: true
+
+- name: file - /swap.img
+  file:
+    path: /swap.img
+    state: absent
