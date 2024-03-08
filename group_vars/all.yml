@@ -9,6 +9,7 @@ common_apt_pkgs:
   - curl
   - gnupg
   - iperf3
+  - ncdu
   - nfs-common
   - prometheus-node-exporter
   - speedtest-cli
