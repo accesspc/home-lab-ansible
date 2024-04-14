@@ -1,0 +1,14 @@
+---
+plugin: amazon.aws.aws_ec2
+
+compose:
+  ansible_host: private_ip_address
+  ansible_user: ec2-user
+filters:
+  instance-state-name: running
+keyed_groups:
+  - key: tags.Type
+    separator: ''
+profile: reiciunas
+regions:
+  - eu-west-2
