@@ -24,14 +24,14 @@
 - name: shell - kubeadm join ...
   shell: "{{ hostvars['k8s-control'].cluster_join_command.stdout }}"
   register: worker_join_output
-  when: "'worker' in group_names"
+  when: "'worker' in group_names and cluster_joined.stat.exists != True"
 
 # Display join command output
 - debug: msg="{{ worker_join_output.stdout_lines }}"
-  when: "'worker' in group_names"
+  when: "'worker' in group_names and cluster_joined.stat.exists != True"
 
 - debug: msg="{{ worker_join_output.stderr_lines }}"
-  when: "'worker' in group_names"
+  when: "'worker' in group_names and cluster_joined.stat.exists != True"
 
 # touch state file
 - name: file - touch /root/.state.cluster.joined

@@ -10,11 +10,11 @@ common_extra_pkgs:
 k8s:
   addons:
     # https://github.com/projectcalico/calico/releases
-    calico: v3.27.2
+    calico: v3.27.3
 
   network_cidr: 10.32.0.0/16
 
   # https://kubernetes.io/releases/
   release: 1.29
-  version: 1.29.2
-  apt_version: 1.29.2-1.1
+  version: 1.29.3
+  apt_version: 1.29.3-1.1
