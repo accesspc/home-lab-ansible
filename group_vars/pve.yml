@@ -11,6 +11,12 @@ nfs:
     owner: 472
     group: nogroup
 
+  - name: postgres
+    net: 192.168.68.0/24
+    mode: "0755"
+    owner: 999
+    group: nogroup
+
   - name: prometheus
     net: 192.168.68.0/24
     mode: "0755"

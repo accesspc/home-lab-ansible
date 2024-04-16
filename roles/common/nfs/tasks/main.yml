@@ -24,7 +24,7 @@
   lineinfile:
     path: /etc/exports
     regex: '^/data/{{ item.name }}\s+.*'
-    line: /data/{{ item.name }} {{ item.net }}(rw,sync,no_subtree_check)
+    line: /data/{{ item.name }} {{ item.net }}(rw,sync,no_subtree_check,no_root_squash)
   loop: "{{ nfs }}"
 
 - name: shell - exportfs -arv
