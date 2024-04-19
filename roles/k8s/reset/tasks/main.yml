@@ -1,0 +1,23 @@
+---
+
+- name: shell - kubeadm reset --force
+  shell: kubeadm reset --force
+  register: kube_reset_status
+
+- debug: msg="{{ kube_reset_status.stdout_lines }}"
+
+- debug: msg="{{ kube_reset_status.stderr_lines }}"
+
+- name: file - rm /root/.state.cluster.setup
+  file:
+    path: /root/.state.cluster.setup
+    state: absent
+
+- name: file - rm /root/.state.cluster.init
+  file:
+    path: /root/.state.cluster.init
+    state: absent
+
+# Reboot, if first time running
+- name: reboot
+  reboot: {}

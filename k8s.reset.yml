@@ -1,0 +1,8 @@
+---
+
+- name: Reset
+  hosts: k8s
+  roles:
+    - k8s/reset
+  tags:
+    - reset
