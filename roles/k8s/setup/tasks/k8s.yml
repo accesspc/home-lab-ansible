@@ -38,6 +38,7 @@
       - kubeadm-{{ k8s.version }}
       - kubectl-{{ k8s.version }}
       - kubelet-{{ k8s.version }}
+      - nfs-utils
     state: present
   when: "ansible_distribution == 'RedHat'"
 
