@@ -1,0 +1,16 @@
+---
+
+- name: firewalld - {{ item }}
+  firewalld:
+    immediate: true
+    permanent: true
+    port: "{{ item }}/tcp"
+    state: enabled
+  with_items: "{{ k8s.firewalld.ports }}"
+
+- name: systemd - firewalld
+  systemd:
+    name: firewalld
+    enabled: false
+    state: stopped
+  when: "ansible_distribution == 'RedHat'"

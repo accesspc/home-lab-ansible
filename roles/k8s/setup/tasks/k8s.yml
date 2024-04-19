@@ -51,3 +51,11 @@
     - kubectl
     - kubelet
   when: "ansible_distribution == 'Ubuntu'"
+
+# Systemd kubelet
+- name: systemd - kubelet
+  systemd:
+    name: kubelet
+    daemon_reload: true
+    enabled: true
+    state: restarted

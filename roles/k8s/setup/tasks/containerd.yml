@@ -38,6 +38,14 @@
     state: present
   when: "ansible_distribution == 'RedHat'"
 
+# Systemd containerd
+- name: systemd - containerd
+  systemd:
+    name: containerd
+    daemon_reload: true
+    enabled: true
+    state: restarted
+
 # mkdir
 - name: file - /etc/containerd
   file:
@@ -50,3 +58,7 @@
 - name: shell - containerd config default > /etc/containerd/config.toml
   shell: containerd config default > /etc/containerd/config.toml
   when: "ansible_distribution == 'Ubuntu'"
+
+- name: shell - containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = true/g' > /etc/containerd/config.toml
+  shell: containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = true/g' > /etc/containerd/config.toml
+  when: "ansible_distribution == 'RedHat'"

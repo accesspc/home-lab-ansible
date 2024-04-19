@@ -27,3 +27,11 @@
   when: "ansible_distribution == 'Ubuntu'"
 
 # TBD: Swap for RedHat
+
+# TBD: SElinux
+- name: lineinfile - SELINUX=permissive
+  lineinfile:
+    path: /etc/selinux/config
+    regex: '^SELINUX=.*'
+    line: 'SELINUX=permissive'
+  when: "ansible_distribution == 'RedHat'"

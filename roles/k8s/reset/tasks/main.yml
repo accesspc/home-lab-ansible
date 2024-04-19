@@ -17,6 +17,13 @@
   file:
     path: /root/.state.cluster.init
     state: absent
+  when: "'control' in group_names"
+
+- name: file - rm /root/.state.cluster.joined
+  file:
+    path: /root/.state.cluster.joined
+    state: absent
+  when: "'worker' in group_names"
 
 # Reboot, if first time running
 - name: reboot

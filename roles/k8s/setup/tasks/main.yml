@@ -36,6 +36,15 @@
   tags:
     - k8s
 
+# FirewallD
+# - name: firewalld rules
+#   import_tasks:
+#     firewall.yml
+#   tags:
+#     - firewall
+#     - firewalld
+#   when: "ansible_distribution == 'RedHat'"
+
 # touch state file
 - name: file - touch /root/.state.cluster.setup
   file:

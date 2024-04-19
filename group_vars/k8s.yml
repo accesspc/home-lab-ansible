@@ -12,6 +12,16 @@ k8s:
     # https://github.com/projectcalico/calico/releases
     calico: v3.27.3
 
+  # firewalld:
+  #   ports:
+  #     - 2379
+  #     - 2380
+  #     - 5473
+  #     - 6443
+  #     - 10250
+  #     - 10251
+  #     - 10252
+
   network_cidr: 10.32.0.0/16
 
   # https://kubernetes.io/releases/

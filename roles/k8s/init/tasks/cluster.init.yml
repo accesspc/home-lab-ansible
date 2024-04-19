@@ -54,5 +54,17 @@
 # Calico CNI
 - name: shell - kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.addons.calico }}/manifests/calico.yaml
   shell: kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.addons.calico }}/manifests/calico.yaml
-  vars:
-    ansible_become: false
+
+# - name: shell - kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.addons.calico }}/manifests/tigera-operator.yaml
+#   shell: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.addons.calico }}/manifests/tigera-operator.yaml
+
+# - name: get_url - https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.addons.calico }}/manifests/custom-resources.yaml
+#   get_url:
+#     url: https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.addons.calico }}/manifests/custom-resources.yaml
+#     dest: /tmp/custom-resources.yaml
+
+# - name: shell - sed /tmp/custom-resources.yaml
+#   shell: "sed -s -i 's|cidr: 192.168.0.0/16|cidr: {{ k8s.network_cidr }}|g' /tmp/custom-resources.yaml"
+
+# - name: shell - kubectl create -f /tmp/custom-resources.yaml
+#   shell: kubectl create -f /tmp/custom-resources.yaml
