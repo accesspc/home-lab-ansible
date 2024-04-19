@@ -19,19 +19,19 @@ You might want to adapt this to your environment.
 * Local user: robertas
 * `~/.ssh/config` file has the following:
 ```
-Host k8s-control
+Host k8s0
         HostName 192.168.68.16
         User robertas
 
-Host k8s-worker1
+Host k8s1
         HostName 192.168.68.17
         User robertas
 
-Host k8s-worker2
+Host k8s2
         HostName 192.168.68.18
         User robertas
 ```
-* I ran `ssh-copy-id robertas@k8s-control` (and the worker nodes) - for ease of access to hosts
+* I ran `ssh-copy-id robertas@k8s0` (and the worker nodes) - for ease of access to hosts
 * I also update sudoers file with `sudo visudo` on each host with below so I don't need password on every sudo. **! ! ! DEVELOPMENT ONLY ! ! !**
 ```
 # from:
@@ -62,7 +62,7 @@ Has 3 groups in it:
 
 **! ! !**
 
-`k8s-control` is used in ansible as host name, so better not change it in inventory file.
+`k8s0` is used in ansible as host name, so better not change it in inventory file.
 
 #### common.all.yml
 
