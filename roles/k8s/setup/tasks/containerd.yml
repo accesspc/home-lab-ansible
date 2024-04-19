@@ -1,27 +1,42 @@
 ---
 
-# apt repo GPG key
+# repo GPG key
 - name: get_url - docker gpg apt_key
   get_url:
     url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
     dest: /etc/apt/trusted.gpg.d/docker.asc
     mode: 0644
     force: true
+  when: "ansible_distribution == 'Ubuntu'"
 
-# apt repo
+# repo
 - name: apt_repository - docker
   apt_repository:
     repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
     filename: docker
     state: present
     update_cache: true
+  when: "ansible_distribution == 'Ubuntu'"
 
-# apt install
+- name: copy - docker repo
+  copy:
+    src: etc/yum.repos.d/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+  when: "ansible_distribution == 'RedHat'"
+
+# install
 - name: apt - containerd.io package
   apt:
     pkg:
       - containerd.io
     state: present
+  when: "ansible_distribution == 'Ubuntu'"
+
+- name: dnf - containerd.io package
+  dnf:
+    name: containerd.io
+    state: present
+  when: "ansible_distribution == 'RedHat'"
 
 # mkdir
 - name: file - /etc/containerd
@@ -29,7 +44,9 @@
     path: /etc/containerd
     state: directory
     mode: 0755
+  when: "ansible_distribution == 'Ubuntu'"
 
 # Generate default config file
 - name: shell - containerd config default > /etc/containerd/config.toml
   shell: containerd config default > /etc/containerd/config.toml
+  when: "ansible_distribution == 'Ubuntu'"

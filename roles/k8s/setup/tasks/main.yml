@@ -1,22 +1,12 @@
 ---
 
-# Reset
-- name: Reset K8s node/cluster
-  import_tasks:
-    reset.yml
-  tags:
-    - never
-    - reset
-
 # check state file
 - name: stat - /root/.state.cluster.setup
   stat:
     path: /root/.state.cluster.setup
   register: cluster_setup
   tags:
-    - containerd
-    - k8s
-    - system
+    - always
 
 # System prep
 - name: System preparation
@@ -45,14 +35,6 @@
     k8s.yml
   tags:
     - k8s
-
-# Install Helm
-- name: Intall helm
-  import_tasks:
-    helm.yml
-  tags:
-    - helm
-  when: "'control' in group_names"
 
 # touch state file
 - name: file - touch /root/.state.cluster.setup

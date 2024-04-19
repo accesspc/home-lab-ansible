@@ -1,5 +1,11 @@
 ---
 
+- name: Facts
+  hosts: k8s
+  tasks: []
+  tags:
+    - always
+
 - name: Common
   hosts: k8s
   roles:

@@ -24,3 +24,6 @@
   file:
     path: /swap.img
     state: absent
+  when: "ansible_distribution == 'Ubuntu'"
+
+# TBD: Swap for RedHat

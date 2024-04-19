@@ -1,16 +1,27 @@
 ---
 
+# GPG key
 - name: get_url - k8s key
   get_url:
     url: https://pkgs.k8s.io/core:/stable:/v{{ k8s.release }}/deb/Release.key
     dest: /etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc
+  when: "ansible_distribution == 'Ubuntu'"
 
+# Repo
 - name: apt_repository - k8s
   apt_repository:
     repo: deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v{{ k8s.release }}/deb/ /
     filename: kubernetes
     state: present
+  when: "ansible_distribution == 'Ubuntu'"
 
+- name: template - dnf kubernetes repo
+  template:
+    src: etc/yum.repos.d/kubernetes.repo.j2
+    dest: /etc/yum.repos.d/kubernetes.repo
+  when: "ansible_distribution == 'RedHat'"
+
+# Install
 - name: apt - k8s packages
   apt:
     pkg:
@@ -19,7 +30,18 @@
       - kubelet={{ k8s.apt_version }}
     state: present
     update_cache: true
+  when: "ansible_distribution == 'Ubuntu'"
 
+- name: dnf - kubeadm
+  dnf:
+    name:
+      - kubeadm-{{ k8s.version }}
+      - kubectl-{{ k8s.version }}
+      - kubelet-{{ k8s.version }}
+    state: present
+  when: "ansible_distribution == 'RedHat'"
+
+# Hold
 - name: dpkg_selections - hold
   dpkg_selections:
     name: "{{ item }}"
@@ -28,3 +50,4 @@
     - kubeadm
     - kubectl
     - kubelet
+  when: "ansible_distribution == 'Ubuntu'"
