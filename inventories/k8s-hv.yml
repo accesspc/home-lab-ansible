@@ -15,13 +15,17 @@ control:
   hosts:
     k8s0:
 
-rhel:
+nfs:
+  hosts:
+    k8s0:
+
+k8s:
   hosts:
     k8s0:
     k8s1:
     k8s2:
 
-k8s:
+rhel:
   hosts:
     k8s0:
     k8s1:

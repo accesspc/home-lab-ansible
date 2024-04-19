@@ -19,6 +19,10 @@ firewall:
   hosts:
     fw01:
 
+nfs:
+  hosts:
+    bl1:
+
 pve:
   hosts:
     bl1:

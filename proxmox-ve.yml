@@ -9,7 +9,7 @@
     - postfix
 
 - name: PVE - NFS server
-  hosts: pve
+  hosts: nfs
   roles:
     - common/nfs
   tags:

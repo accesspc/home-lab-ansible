@@ -5,6 +5,21 @@
     pkg:
       - nfs-kernel-server
     state: present
+  when: "ansible_distribution == 'Debian'"
+
+- name: dnf - nfs-utils
+  dnf:
+    name:
+      - nfs-utils
+    state: present
+  when: "ansible_distribution == 'RedHat'"
+
+- name: systemd - nfs-server
+  systemd:
+    name: nfs-server
+    enabled: true
+    state: restarted
+  when: "ansible_distribution == 'RedHat'"
 
 - name: file - /data
   file:
@@ -16,7 +31,6 @@
     path: /data/{{ item.name }}
     state: directory
     owner: "{{ item.owner }}"
-    group: "{{ item.group }}"
     mode: "{{ item.mode }}"
   loop: "{{ nfs }}"
 
