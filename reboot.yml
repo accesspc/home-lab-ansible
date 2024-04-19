@@ -1,0 +1,9 @@
+---
+
+- name: Common
+  hosts: k8s
+  roles:
+    - common/reboot
+  tags:
+    - never
+    - reboot
