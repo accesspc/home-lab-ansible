@@ -1,0 +1,33 @@
+---
+
+all:
+  hosts:
+    k8s0:
+      ansible_host: k8s0
+    k8s1:
+      ansible_host: k8s1
+    k8s2:
+      ansible_host: k8s2
+  vars:
+    domain: reiciunas.dev
+
+control:
+  hosts:
+    k8s0:
+
+rhel:
+  hosts:
+    k8s0:
+    k8s1:
+    k8s2:
+
+k8s:
+  hosts:
+    k8s0:
+    k8s1:
+    k8s2:
+
+worker:
+  hosts:
+    k8s1:
+    k8s2:

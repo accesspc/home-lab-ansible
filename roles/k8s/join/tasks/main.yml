@@ -17,12 +17,12 @@
 - debug: msg="{{ cluster_join_command.stdout }}"
   when: "'control' in group_names"
 
-- debug: msg="{{ hostvars['k8s-control'].cluster_join_command.stdout }}"
+- debug: msg="{{ hostvars['k8s0'].cluster_join_command.stdout }}"
   when: "'worker' in group_names"
 
 # Join worker nodes
 - name: shell - kubeadm join ...
-  shell: "{{ hostvars['k8s-control'].cluster_join_command.stdout }}"
+  shell: "{{ hostvars['k8s0'].cluster_join_command.stdout }}"
   register: worker_join_output
   when: "'worker' in group_names and cluster_joined.stat.exists != True"
 
