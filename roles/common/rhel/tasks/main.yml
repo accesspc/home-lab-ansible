@@ -1,0 +1,5 @@
+---
+
+- name: shell - hostnamectl
+  shell:
+    cmd: hostnamectl set-hostname {{ ansible_host }}.{{ domain }}
