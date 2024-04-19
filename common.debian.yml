@@ -1,13 +1,5 @@
 ---
 
-- name: Common - APT
-  hosts: all
-  roles:
-    - common/apt
-  tags:
-    - commont
-    - apt
-
 - name: Common - User
   hosts: all
   roles:
@@ -15,3 +7,11 @@
   tags:
     - common
     - user
+
+- name: Common - APT
+  hosts: all
+  roles:
+    - common/apt
+  tags:
+    - commont
+    - apt

@@ -1,0 +1,26 @@
+---
+
+- name: Common - User
+  hosts: all
+  roles:
+    - common/user
+  tags:
+    - common
+    - user
+
+- name: Common - RHEL
+  hosts: rhel
+  roles:
+    - common/rhel
+  tags:
+    - common
+    - rhel
+
+- name: Common - RHEL DNF
+  hosts: rhel
+  roles:
+    - common/dnf
+  tags:
+    - common
+    - dnf
+    - rhel
