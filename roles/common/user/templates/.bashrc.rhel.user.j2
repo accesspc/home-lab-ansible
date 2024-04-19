@@ -27,3 +27,8 @@ fi
 alias la='ls -alF'
 
 unset rc
+
+{% if 'k8s' in group_names %}
+source <(kubeadm completion bash)
+source <(kubectl completion bash)
+{% endif %}

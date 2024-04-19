@@ -20,4 +20,10 @@ export PATH
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
 alias la='ls -alF'
+
+{% if 'k8s' in group_names %}
+source <(kubeadm completion bash)
+source <(kubectl completion bash)
+{% endif %}
