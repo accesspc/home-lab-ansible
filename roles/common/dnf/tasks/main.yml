@@ -1,0 +1,10 @@
+---
+
+- name: dnf - upgrade
+  dnf:
+    name: "*"
+    state: latest
+
+- name: dnf - autoremove
+  dnf:
+    autoremove: true
