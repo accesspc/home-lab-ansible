@@ -25,12 +25,6 @@ k8s:
     k8s1:
     k8s2:
 
-rhel:
-  hosts:
-    k8s0:
-    k8s1:
-    k8s2:
-
 worker:
   hosts:
     k8s1:
