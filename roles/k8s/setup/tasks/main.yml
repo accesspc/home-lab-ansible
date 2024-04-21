@@ -6,7 +6,11 @@
     path: /root/.state.cluster.setup
   register: cluster_setup
   tags:
-    - always
+    - containerd
+    - firewall
+    - firewalld
+    - reboot
+    - system
 
 # System prep
 - name: System preparation
