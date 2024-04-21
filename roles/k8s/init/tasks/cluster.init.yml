@@ -51,7 +51,3 @@
 - name: pause - 15s
   pause:
     seconds: 15
-
-# Calico CNI
-- name: shell - kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.addons.calico }}/manifests/calico.yaml
-  shell: kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.addons.calico }}/manifests/calico.yaml

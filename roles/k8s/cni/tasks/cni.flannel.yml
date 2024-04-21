@@ -1,0 +1,16 @@
+---
+
+# Download manifest
+- name: get_url - https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+  get_url:
+    url: https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+    dest: /tmp/kube-flannel.yml
+    force: true
+
+# Replace default subnet
+- name: shell - sed kube-flannel.yml
+  shell: sed -s -i 's;10.244.0.0/16;{{ k8s.network_cidr }};g' /tmp/kube-flannel.yml
+
+# Apply Flannel CNI
+- name: shell - kubectl apply -f /tmp/kube-flannel.yml
+  shell: kubectl apply -f /tmp/kube-flannel.yml

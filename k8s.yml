@@ -22,6 +22,14 @@
     - init
     - k8s
 
+- name: K8s CNI
+  hosts: control
+  roles:
+    - k8s/cni
+  tags:
+    - cni
+    - k8s
+
 - name: K8s join
   hosts: k8s
   roles:

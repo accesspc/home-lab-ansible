@@ -5,9 +5,11 @@ ansible_become_method: sudo
 ansible_user: robertas
 
 k8s:
-  addons:
+  cni:
+    select: calico
     # https://github.com/projectcalico/calico/releases
     calico: v3.27.3
+    flannel: v0.25.1
 
   firewalld:
     ports:

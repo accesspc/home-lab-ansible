@@ -1,0 +1,13 @@
+---
+
+# CNI: Calico
+- name: K8s CNI - Calico
+  import_tasks:
+    cni.calico.yml
+  when: k8s.cni.select == 'calico'
+
+# CNI: Flannel
+- name: K8s CNI - Flannel
+  import_tasks:
+    cni.flannel.yml
+  when: k8s.cni.select == 'flannel'
