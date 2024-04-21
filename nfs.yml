@@ -1,6 +1,6 @@
 ---
 
-- name: PVE - NFS server
+- name: NFS server
   hosts: nfs
   roles:
     - common/nfs

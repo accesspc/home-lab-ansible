@@ -29,3 +29,10 @@
   tags:
     - join
     - k8s
+
+- name: NFS server
+  hosts: nfs
+  roles:
+    - common/nfs
+  tags:
+    - nfs

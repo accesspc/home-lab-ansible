@@ -1,12 +1,21 @@
 ---
 
-- name: firewalld - {{ item }}
+- name: firewalld - ports
   firewalld:
     immediate: true
     permanent: true
-    port: "{{ item }}/tcp"
+    port: "{{ item }}"
     state: enabled
   with_items: "{{ k8s.firewalld.ports }}"
+
+- name: firewalld - trusted sources
+  firewalld:
+    immediate: true
+    permanent: true
+    source: "{{ item }}"
+    state: enabled
+    zone: trusted
+  with_items: "{{ k8s.firewalld.trusted_sources }}"
 
 - name: systemd - firewalld
   systemd:

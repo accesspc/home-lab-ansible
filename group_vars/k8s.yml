@@ -11,18 +11,25 @@ k8s:
 
   firewalld:
     ports:
-      # Calico / BGP
-      - 179
       # Kubernetes https://kubernetes.io/docs/reference/networking/ports-and-protocols/
-      - 2379
-      - 2380
-      - 5473
-      - 6443
-      - 10250
-      - 10256
-      - 10257
-      - 10259
-      - 30000-32767
+      - 2379/tcp
+      - 2380/tcp
+      - 5473/tcp
+      - 6443/tcp
+      - 10250/tcp
+      - 10256/tcp
+      - 10257/tcp
+      - 10259/tcp
+      - 30000-32767/tcp
+      # Calico / BGP
+      - 179/tcp
+      # NFS server
+      - 111/tcp
+      - 111/udp
+      - 2049/tcp
+      - 2049/udp
+    trusted_sources:
+      - 192.168.68.0/22
 
   network_cidr: 10.32.0.0/16
 
