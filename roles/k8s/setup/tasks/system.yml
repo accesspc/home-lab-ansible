@@ -20,6 +20,9 @@
     line: '#\1'
     backrefs: true
 
+- name: shell - swapoff -a
+  shell: swapoff -a
+
 - name: file - /swap.img
   file:
     path: /swap.img
