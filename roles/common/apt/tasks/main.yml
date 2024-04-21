@@ -1,27 +1,32 @@
 ---
 
+# Only: pve / proxmox
 - name: apt - pve
   import_tasks:
     pve.yml
   when: "'pve' in group_names"
 
+# up-to-date
 - name: apt - update && dist-upgrade
   apt:
     update_cache: true
     upgrade: dist
     force: true
 
+# Install common packages
 - name: apt - common packages
   apt:
     name: "{{ common_apt_pkgs }}"
     state: present
 
+# Install common extra packages
 - name: apt - common extra packages
   apt:
-    name: "{{ common_extra_pkgs }}"
+    name: "{{ common_apt_extra_pkgs }}"
     state: present
-  when: common_extra_pkgs is defined
+  when: common_apt_extra_pkgs is defined
 
+# Cleanup apt
 - name: apt - remove obsolete packages
   apt:
     autoremove: true

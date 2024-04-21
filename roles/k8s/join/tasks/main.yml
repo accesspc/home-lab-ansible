@@ -33,7 +33,7 @@
 - debug: msg="{{ worker_join_output.stderr_lines }}"
   when: "'worker' in group_names and cluster_joined.stat.exists != True"
 
-# touch state file
+# Touch state file
 - name: file - touch /root/.state.cluster.joined
   file:
     path: /root/.state.cluster.joined

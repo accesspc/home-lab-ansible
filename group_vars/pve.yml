@@ -1,5 +1,5 @@
 ---
 
 # common
-common_extra_pkgs:
+common_apt_extra_pkgs:
   - python3-certbot-dns-route53

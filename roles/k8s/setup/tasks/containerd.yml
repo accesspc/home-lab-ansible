@@ -1,6 +1,6 @@
 ---
 
-# repo GPG key
+# Get docker repo GPG key
 - name: get_url - docker gpg apt_key
   get_url:
     url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
@@ -9,7 +9,7 @@
     force: true
   when: "ansible_distribution == 'Ubuntu'"
 
-# repo
+# Create docker repo
 - name: apt_repository - docker
   apt_repository:
     repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
@@ -24,7 +24,7 @@
     dest: /etc/yum.repos.d/docker-ce.repo
   when: "ansible_distribution == 'RedHat'"
 
-# install
+# Install containerd.io
 - name: apt - containerd.io package
   apt:
     pkg:

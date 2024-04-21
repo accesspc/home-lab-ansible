@@ -1,5 +1,6 @@
 ---
 
+# Install packages
 - name: apt - postfix packages
   apt:
     pkg:
@@ -7,6 +8,7 @@
       - postfix
     state: present
 
+# Configure postfix
 - name: shell - postconf
   shell:
     cmd: >
@@ -21,16 +23,19 @@
       "mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 192.168.0.0/23 192.168.68.0/24"
       "smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt"
 
+# Template sasl_passwd
 - name: template - /etc/postfix/sasl_passwd
   template:
     dest: /etc/postfix/sasl_passwd
     src: sasl_passwd.j2
     mode: 0600
 
+# Postmap
 - name: shell - postmap
   shell:
     cmd: postmap hash:/etc/postfix/sasl_passwd
 
+# Restart posftix
 - name: systemd - postfix
   systemd:
     name: postfix

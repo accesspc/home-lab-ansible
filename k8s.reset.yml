@@ -6,3 +6,10 @@
     - k8s/reset
   tags:
     - reset
+
+- name: Common
+  hosts: k8s
+  roles:
+    - common/reboot
+  tags:
+    - reboot

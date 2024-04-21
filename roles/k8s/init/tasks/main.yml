@@ -1,6 +1,6 @@
 ---
 
-# check state file
+# Check state file
 - name: stat - /root/.state.cluster.init
   stat:
     path: /root/.state.cluster.init
@@ -12,7 +12,7 @@
     cluster.init.yml
   when: not cluster_init.stat.exists
 
-# get nodes
+# Get and print nodes
 - name: shell - kubectl get nodes
   shell: kubectl get nodes
   register: nodes

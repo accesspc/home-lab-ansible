@@ -1,5 +1,6 @@
 ---
 
+# Install nfs package
 - name: apt - nfs-kernel-server
   apt:
     pkg:
@@ -14,18 +15,20 @@
     state: present
   when: "ansible_distribution == 'RedHat'"
 
+# Enable and start nfs-server
 - name: systemd - nfs-server
   systemd:
     name: nfs-server
     enabled: true
     state: restarted
-  when: "ansible_distribution == 'RedHat'"
 
+# Create /data dir
 - name: file - /data
   file:
     path: /data
     state: directory
 
+# Create /data/{subdir}
 - name: file - /data/{{ item.name }}
   file:
     path: /data/{{ item.name }}
@@ -34,6 +37,7 @@
     mode: "{{ item.mode }}"
   loop: "{{ nfs }}"
 
+# Set nfs exports
 - name: lineinfile - /etc/exports - {{ item.name }}
   lineinfile:
     path: /etc/exports
@@ -41,6 +45,7 @@
     line: /data/{{ item.name }} {{ item.net }}(rw,sync,no_subtree_check,no_root_squash)
   loop: "{{ nfs }}"
 
+# Export nfs
 - name: shell - exportfs -arv
   shell:
     cmd: exportfs -arv

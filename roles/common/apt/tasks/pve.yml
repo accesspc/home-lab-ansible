@@ -1,5 +1,6 @@
 ---
 
+# Update pve ceph repos
 - name: apt_repository - ceph enterprise
   apt_repository:
     repo: deb https://enterprise.proxmox.com/debian/ceph-quincy {{ ansible_distribution_release }} enterprise
@@ -14,6 +15,7 @@
     state: present
     update_cache: false
 
+# Update pve repos
 - name: apt_repository - pve-enterprise
   apt_repository:
     repo: deb https://enterprise.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-enterprise

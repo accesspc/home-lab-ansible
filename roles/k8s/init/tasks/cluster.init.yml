@@ -1,6 +1,6 @@
 ---
 
-# Cluster INIT
+# Init kube cluster
 - name: shell - kubeadm init --pod-network-cidr {{ k8s.network_cidr }} --kubernetes-version {{ k8s.version }}
   shell: kubeadm init --pod-network-cidr {{ k8s.network_cidr }} --kubernetes-version {{ k8s.version }}
   register: kubeadm_init_output
@@ -9,12 +9,13 @@
 
 - debug: msg="{{ kubeadm_init_output.stderr_lines }}"
 
+# Touch state file
 - name: file - touch /root/.state.cluster.init
   file:
     path: /root/.state.cluster.init
     state: touch
 
-# root
+# Setup kube config for root
 - name: file - /root/.kube
   file:
     path: /root/.kube
@@ -27,7 +28,7 @@
     mode: 0600
     remote_src: true
 
-# ansible_user
+# Setup kube config for ansible_user
 - name: file - /home/{{ ansible_user }}/.kube
   file:
     path: /home/{{ ansible_user }}/.kube

@@ -1,5 +1,13 @@
 ---
 
+- name: Common - Hostname
+  hosts: all
+  roles:
+    - common/hostname
+  tags:
+    - common
+    - hostname
+
 - name: Common - User
   hosts: all
   roles:
@@ -7,14 +15,6 @@
   tags:
     - common
     - user
-
-- name: Common - RHEL
-  hosts: rhel
-  roles:
-    - common/rhel
-  tags:
-    - common
-    - rhel
 
 - name: Common - RHEL DNF
   hosts: rhel

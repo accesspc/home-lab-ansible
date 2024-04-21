@@ -1,5 +1,6 @@
 ---
 
+# Reset kubeadm and print output
 - name: shell - kubeadm reset --force
   shell: kubeadm reset --force
   register: kube_reset_status
@@ -8,6 +9,7 @@
 
 - debug: msg="{{ kube_reset_status.stderr_lines }}"
 
+# Remove state files
 - name: file - rm /root/.state.cluster.setup
   file:
     path: /root/.state.cluster.setup
@@ -24,7 +26,3 @@
     path: /root/.state.cluster.joined
     state: absent
   when: "'worker' in group_names"
-
-# Reboot, if first time running
-- name: reboot
-  reboot: {}

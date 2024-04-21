@@ -1,5 +1,6 @@
 ---
 
+# Set bash for root
 - name: template - .bashrc
   template:
     src: .bashrc.debian.j2
@@ -21,12 +22,14 @@
     mode: 0600
   when: "ansible_distribution == 'Ubuntu'"
 
+# Set vimrc for root
 - name: template - .vimrc
   template:
     src: .vimrc.j2
     dest: /root/.vimrc
     mode: 0600
 
+# Set bash for ansible_user
 - name: template - .bash_aliases
   template:
     src: .bash_aliases.j2

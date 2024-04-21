@@ -1,10 +1,26 @@
 ---
 
+# up-to-date
 - name: dnf - upgrade
   dnf:
     name: "*"
     state: latest
 
+# Install common packages
+- name: dnf - common packages
+  dnf:
+    name: "{{ common_dnf_pkgs }}"
+    state: present
+  when: common_dnf_pkgs is defined
+
+# Install common extra packages
+- name: dnf - common extra packages
+  dnf:
+    name: "{{ common_dnf_extra_pkgs }}"
+    state: present
+  when: common_dnf_extra_pkgs is defined
+
+# Cleanup dnf
 - name: dnf - autoremove
   dnf:
     autoremove: true
