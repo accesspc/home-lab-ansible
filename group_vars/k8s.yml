@@ -9,15 +9,20 @@ k8s:
     # https://github.com/projectcalico/calico/releases
     calico: v3.27.3
 
-  # firewalld:
-  #   ports:
-  #     - 2379
-  #     - 2380
-  #     - 5473
-  #     - 6443
-  #     - 10250
-  #     - 10251
-  #     - 10252
+  firewalld:
+    ports:
+      # Calico / BGP
+      - 179
+      # Kubernetes https://kubernetes.io/docs/reference/networking/ports-and-protocols/
+      - 2379
+      - 2380
+      - 5473
+      - 6443
+      - 10250
+      - 10256
+      - 10257
+      - 10259
+      - 30000-32767
 
   network_cidr: 10.32.0.0/16
 

@@ -11,6 +11,5 @@
 - name: systemd - firewalld
   systemd:
     name: firewalld
-    enabled: false
-    state: stopped
-  when: "ansible_distribution == 'RedHat'"
+    enabled: true
+    state: restarted

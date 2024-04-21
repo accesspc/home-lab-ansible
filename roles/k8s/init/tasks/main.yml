@@ -12,6 +12,16 @@
     cluster.init.yml
   when: not cluster_init.stat.exists
 
+# Fetch kube config to running machine
+- name: fetch /etc/kubernetes/admin.conf ~/.kube/config
+  fetch:
+    src: /etc/kubernetes/admin.conf
+    dest: ~/.kube/config
+    flat: true
+  tags:
+    - kube-config
+  when: "'control' in group_names"
+
 # Get and print nodes
 - name: shell - kubectl get nodes
   shell: kubectl get nodes
