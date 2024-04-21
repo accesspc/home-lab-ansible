@@ -17,6 +17,15 @@
     zone: trusted
   with_items: "{{ k8s.firewalld.trusted_sources }}"
 
+- name: firewalld - network_cidr
+  firewalld:
+    immediate: true
+    permanent: true
+    source: "{{ item }}"
+    state: enabled
+    zone: trusted
+  with_items: "{{ k8s.network_cidr }}"
+
 - name: systemd - firewalld
   systemd:
     name: firewalld
