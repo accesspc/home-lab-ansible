@@ -4,8 +4,8 @@ ansible_become: true
 ansible_become_method: sudo
 ansible_user: robertas
 
-k8s_cgroup_RedHat: true
-k8s_cgroup_Ubuntu: false
+k8s_cgroup_RedHat: "true"
+k8s_cgroup_Ubuntu: "false"
 
 k8s:
   cni:
