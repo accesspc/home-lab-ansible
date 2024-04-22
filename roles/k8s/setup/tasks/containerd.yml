@@ -55,10 +55,10 @@
   when: "ansible_distribution == 'Ubuntu'"
 
 # Generate default config file
-- name: shell - containerd config default > /etc/containerd/config.toml
-  shell: containerd config default > /etc/containerd/config.toml
-  when: "ansible_distribution == 'Ubuntu'"
+- name: set_fact - cgroup
+  set_fact:
+    cgroup: "{{ lookup('ansible.builtin.vars', 'k8s_cgroup_' + ansible_distribution) }}"
 
-- name: shell - containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = true/g' > /etc/containerd/config.toml
-  shell: containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = true/g' > /etc/containerd/config.toml
+- name: shell - containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = {{ cgroup }}/g' > /etc/containerd/config.toml
+  shell: containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = {{ cgroup }}/g' > /etc/containerd/config.toml
   when: "ansible_distribution == 'RedHat'"
