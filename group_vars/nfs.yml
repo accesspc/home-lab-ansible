@@ -1,11 +1,6 @@
 ---
 
 nfs:
-  - name: grafana
-    net: 192.168.68.0/24
-    mode: "0755"
-    owner: 472
-
   - name: postgres
     net: 192.168.68.0/24
     mode: "0755"
