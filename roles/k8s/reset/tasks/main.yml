@@ -4,25 +4,63 @@
 - name: shell - kubeadm reset --force
   shell: kubeadm reset --force
   register: kube_reset_status
+  ignore_errors: true
 
 - debug: msg="{{ kube_reset_status.stdout_lines }}"
 
 - debug: msg="{{ kube_reset_status.stderr_lines }}"
 
-# Remove state files
-- name: file - rm /root/.state.cluster.setup
-  file:
-    path: /root/.state.cluster.setup
-    state: absent
+# Remove packages
+- name: dpkg_selections - hold
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: purge
+  with_items:
+    - kubeadm
+    - kubectl
+    - kubelet
+  when: "ansible_distribution == 'Ubuntu'"
 
-- name: file - rm /root/.state.cluster.init
-  file:
-    path: /root/.state.cluster.init
+- name: apt - kubeadm kubectl kubelet
+  apt:
+    name:
+      - containerd.io
+      - kubeadm
+      - kubectl
+      - kubelet
     state: absent
-  when: "'control' in group_names"
+  when: "ansible_distribution == 'Ubuntu'"
 
-- name: file - rm /root/.state.cluster.joined
-  file:
-    path: /root/.state.cluster.joined
+- name: dnf - kubeadm kubectl kubelet
+  dnf:
+    name:
+      - containerd.io
+      - kubeadm
+      - kubectl
+      - kubelet
     state: absent
-  when: "'worker' in group_names"
+  when: "ansible_distribution == 'RedHat'"
+
+# Remove files and directories
+- name: file - loop pkgs files and dirs
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/cni
+    - /etc/kubernetes
+    - /opt/cni
+    - /opt/containerd
+    - /var/lib/containerd
+    - /var/lib/containers
+    - /var/log/calico
+    - /var/log/pods
+
+- name: file - loop state files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /root/.state.cluster.setup
+    - /root/.state.cluster.init
+    - /root/.state.cluster.joined
