@@ -1,0 +1,18 @@
+---
+
+- name: dnf - install cockpit-pcp
+  dnf:
+    name: cockpit-pcp
+    state: present
+
+- name: systemd - cockpit.socket
+  systemd:
+    name: cockpit.socket
+    enabled: true
+    state: restarted
+
+- name: systemd - pmlogger.service
+  systemd:
+    name: pmlogger.service
+    enabled: true
+    state: restarted

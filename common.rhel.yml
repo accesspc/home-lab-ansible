@@ -17,10 +17,18 @@
     - user
 
 - name: Common - RHEL DNF
-  hosts: rhel
+  hosts: all
   roles:
     - common/dnf
   tags:
     - common
     - dnf
     - rhel
+
+- name: Common - Cockpit
+  hosts: all
+  roles:
+    - common/cockpit
+  tags:
+    - common
+    - cockpit
