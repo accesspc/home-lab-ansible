@@ -11,3 +11,9 @@
   import_tasks:
     cni.flannel.yml
   when: k8s.cni.select == 'flannel'
+
+# CNI: kube-router
+- name: K8s CNI - kube-router
+  import_tasks:
+    cni.kube-router.yml
+  when: k8s.cni.select == 'kube-router'

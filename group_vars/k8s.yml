@@ -9,10 +9,19 @@ k8s_cgroup_Ubuntu: "false"
 
 k8s:
   cni:
-    select: calico
+    select: kube-router
+
     # https://github.com/projectcalico/calico/releases
-    calico: v3.27.3
-    flannel: v0.25.1
+    calico:
+      version: v3.27.3
+
+    # https://github.com/flannel-io/flannel/releases
+    flannel:
+      version: v0.25.1
+
+    # https://github.com/cloudnativelabs/kube-router/releases
+    kube-router:
+      version: v1.6.1
 
   firewalld:
     ports:
