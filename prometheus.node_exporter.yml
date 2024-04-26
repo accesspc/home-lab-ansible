@@ -1,9 +1,0 @@
----
-
-- name: Prometheus - node_exporter
-  hosts: all
-  roles:
-    - prometheus/node_exporter
-  tags:
-    - node_exporter
-    - prometheus

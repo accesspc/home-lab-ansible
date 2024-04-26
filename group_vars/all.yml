@@ -11,9 +11,5 @@ common_apt_pkgs:
   - iperf3
   - ncdu
   - nfs-common
-  - prometheus-node-exporter
   - speedtest-cli
   - vim-nox
-
-prometheus:
-  node_exporter: 1.7.0
