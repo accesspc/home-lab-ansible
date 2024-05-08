@@ -32,8 +32,8 @@
     state: present
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: dnf - containerd.io package
-  dnf:
+- name: yum - containerd.io package
+  yum:
     name: containerd.io
     state: present
   when: "ansible_distribution == 'RedHat'"

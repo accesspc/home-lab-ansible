@@ -1,7 +1,7 @@
 ---
 
-- name: dnf - install cockpit-pcp
-  dnf:
+- name: yum - install cockpit-pcp
+  yum:
     name: cockpit-pcp
     state: present
 

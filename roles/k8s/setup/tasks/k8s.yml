@@ -15,7 +15,7 @@
     state: present
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: template - dnf kubernetes repo
+- name: template - yum kubernetes repo
   template:
     src: etc/yum.repos.d/kubernetes.repo.j2
     dest: /etc/yum.repos.d/kubernetes.repo
@@ -32,8 +32,8 @@
     update_cache: true
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: dnf - kubeadm
-  dnf:
+- name: yum - kubeadm
+  yum:
     name:
       - kubeadm-{{ k8s.version }}
       - kubectl-{{ k8s.version }}
@@ -51,8 +51,8 @@
     update_cache: true
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: dnf - nfs-utils
-  dnf:
+- name: yum - nfs-utils
+  yum:
     name:
       - nfs-utils
     state: present

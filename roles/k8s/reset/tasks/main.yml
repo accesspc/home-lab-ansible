@@ -31,8 +31,8 @@
     state: absent
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: dnf - kubeadm kubectl kubelet
-  dnf:
+- name: yum - kubeadm kubectl kubelet
+  yum:
     name:
       - containerd.io
       - kubeadm

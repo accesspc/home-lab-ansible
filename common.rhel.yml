@@ -19,10 +19,10 @@
 - name: Common - RHEL DNF
   hosts: all
   roles:
-    - common/dnf
+    - common/yum
   tags:
     - common
-    - dnf
+    - yum
     - rhel
 
 - name: Common - Cockpit
