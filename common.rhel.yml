@@ -26,7 +26,7 @@
     - rhel
 
 - name: Common - Cockpit
-  hosts: all
+  hosts: k8s
   roles:
     - common/cockpit
   tags:
