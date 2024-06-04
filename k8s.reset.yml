@@ -5,6 +5,7 @@
   roles:
     - k8s/reset
   tags:
+    - never
     - reset
 
 - name: Common
@@ -12,4 +13,6 @@
   roles:
     - common/reboot
   tags:
+    - never
     - reboot
+    - reset
