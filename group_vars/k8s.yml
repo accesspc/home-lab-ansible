@@ -13,15 +13,15 @@ k8s:
 
     # https://github.com/projectcalico/calico/releases
     calico:
-      version: v3.27.3
+      version: v3.29.0
 
     # https://github.com/flannel-io/flannel/releases
     flannel:
-      version: v0.25.1
+      version: v0.25.3
 
     # https://github.com/cloudnativelabs/kube-router/releases
     kube-router:
-      version: v1.6.1
+      version: v2.1.3
 
   firewalld:
     ports:
@@ -48,6 +48,4 @@ k8s:
   network_cidr: 10.32.0.0/16
 
   # https://kubernetes.io/releases/
-  release: "1.30"
-  version: "1.30.0"
-  apt_version: "1.30.0-1.1"
+  version: "1.30.1"
