@@ -16,7 +16,7 @@
     - common
     - user
 
-- name: Common - RHEL DNF
+- name: Common - RHEL YUM
   hosts: all
   roles:
     - common/yum
