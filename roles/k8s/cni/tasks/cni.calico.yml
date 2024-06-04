@@ -3,3 +3,5 @@
 # Apply Calico CNI
 - name: shell - kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.cni.calico.version }}/manifests/calico.yaml
   shell: kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/{{ k8s.cni.calico.version }}/manifests/calico.yaml
+  delay: 5
+  retries: 30

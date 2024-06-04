@@ -14,3 +14,5 @@
 # Apply Flannel CNI
 - name: shell - kubectl apply -f /tmp/kube-flannel.yml
   shell: kubectl apply -f /tmp/kube-flannel.yml
+  delay: 5
+  retries: 30
