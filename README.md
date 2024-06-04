@@ -66,10 +66,12 @@ Has 3 groups in it:
 
 #### common.all.yml
 
+> common.all.yml split into 2: `debian` (_.deb_) and `rhel` (_.rpm_) based
+
 Update packages to the latest version, add some bash aliases and bash completion for kubeadm and kubectl
 
 ```bash
-ansible-playbook -i inventories/k8s.yml common.all.yml
+ansible-playbook -i inventories/k8s.yml common.rhel.yml
 ```
 
 #### k8s.yml - setup
@@ -103,4 +105,22 @@ Join worker nodes to the K8s cluster:
 
 ```bash
 ansible-playbook -i inventories/k8s.yml k8s.yml -t join
+```
+
+#### k8s.reset.yml
+
+Completely reset and uninstall K8s cluster - start from scratch:
+
+```bash
+ansible-playbook -i inventories/k8s.yml k8s.reset.yml -t reset
+```
+
+#### k8s.upgrade.yml
+
+Upgrade K8s cluster to a selected version. Follow official [Upgrading kubeadm cluster](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/) documentation.
+
+* `k8s_upgrade_version` - desired version to upgrade to
+
+```bash
+ansible-playbook -i inventories/k8s.yml k8s.upgrade.yml -t upgrade -e "k8s_upgrade_version=1.30.1"
 ```
