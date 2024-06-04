@@ -25,6 +25,8 @@
 # Get and print nodes
 - name: shell - kubectl get nodes
   shell: kubectl get nodes
+  delay: 5
   register: nodes
+  retries: 30
 
 - debug: msg={{ nodes.stdout_lines }}

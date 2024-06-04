@@ -46,8 +46,3 @@
     group: "{{ ansible_user }}"
     mode: 0600
   when: "ansible_user != 'root'"
-
-# Pause to become ready
-- name: pause - 15s
-  pause:
-    seconds: 15
