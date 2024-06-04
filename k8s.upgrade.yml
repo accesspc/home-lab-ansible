@@ -1,0 +1,36 @@
+---
+
+- name: Facts
+  hosts: k8s
+  tasks: []
+  tags:
+    - always
+
+- name: Upgrade control plane
+  hosts: control
+  roles:
+    - k8s/upgrade
+  tags:
+    - k8s
+    - never
+    - upgrade
+
+- name: K8s CNI
+  hosts: control
+  roles:
+    - k8s/cni
+  tags:
+    - cni
+    - k8s
+    - never
+    - upgrade
+
+- name: Upgrade workers
+  hosts: worker
+  roles:
+    - k8s/upgrade
+  serial: 1
+  tags:
+    - k8s
+    - never
+    - upgrade

@@ -1,0 +1,13 @@
+---
+
+# Upgrade control first node
+- name: Upgrade control first node
+  import_tasks:
+    upgrade.yml
+  when: "ansible_host == groups['control'][0]"
+
+# Upgrade other nodes
+- name: Upgrade other nodes
+  import_tasks:
+    upgrade.yml
+  when: "ansible_host != groups['control'][0]"
