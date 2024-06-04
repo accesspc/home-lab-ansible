@@ -1,16 +1,24 @@
 ---
 
+- name: set_fact - k8s_apt_version
+  set_fact:
+    k8s_apt_version: "{{ k8s.version }}-1.1"
+
+- name: set_fact - k8s_release
+  set_fact:
+    k8s_release: "{{ k8s.version | regex_replace('^(.*)\\.\\d+$', '\\1') }}"
+
 # Get kubernetes repo GPG key
 - name: get_url - k8s key
   get_url:
-    url: https://pkgs.k8s.io/core:/stable:/v{{ k8s.release }}/deb/Release.key
+    url: https://pkgs.k8s.io/core:/stable:/v{{ k8s_release }}/deb/Release.key
     dest: /etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc
   when: "ansible_distribution == 'Ubuntu'"
 
 # Create kubernetes repo
 - name: apt_repository - k8s
   apt_repository:
-    repo: deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v{{ k8s.release }}/deb/ /
+    repo: deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v{{ k8s_release }}/deb/ /
     filename: kubernetes
     state: present
   when: "ansible_distribution == 'Ubuntu'"
@@ -25,9 +33,9 @@
 - name: apt - k8s packages
   apt:
     pkg:
-      - kubeadm={{ k8s.apt_version }}
-      - kubectl={{ k8s.apt_version }}
-      - kubelet={{ k8s.apt_version }}
+      - kubeadm={{ k8s_apt_version }}
+      - kubectl={{ k8s_apt_version }}
+      - kubelet={{ k8s_apt_version }}
     state: present
     update_cache: true
   when: "ansible_distribution == 'Ubuntu'"
