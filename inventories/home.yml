@@ -2,38 +2,24 @@
 
 all:
   hosts:
-    bl1:
-      ansible_host: 192.168.68.2
     fh01:
       ansible_host: 77.68.30.113
-    fw01:
-      ansible_host: 192.168.68.11
     fw02:
       ansible_host: 192.168.68.12
 
 debian:
   hosts:
-    bl1:
     fh01:
-    fw01:
     fw02:
 
 firewall:
   hosts:
-    fw01:
     fw02:
 
-nfs:
-  hosts:
-    bl1:
-
-pve:
-  hosts:
-    bl1:
+# pve:
+#   hosts:
 
 tsgw:
   hosts:
-    bl1:
     fh01:
-    fw01:
     fw02:
