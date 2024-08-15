@@ -1,0 +1,16 @@
+---
+
+- name: lineinfile - ~/.bash_aliases - brew
+  lineinfile:
+    path: ~/.bash_aliases
+    regex: '^export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH'
+    line: export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+
+- name: homebrew - update && upgrade
+  community.general.homebrew:
+    update_homebrew: true
+    upgrade_all: true
+
+- name: homebrew - pkgs
+  community.general.homebrew:
+    name: "{{ brew_pkgs }}"
