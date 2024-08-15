@@ -1,5 +1,8 @@
 ---
 
+common_apt_extra_pkgs:
+  - nfs-common
+
 nfs:
   - name: postgres
     net: 192.168.68.0/24

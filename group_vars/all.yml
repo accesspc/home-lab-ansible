@@ -10,6 +10,5 @@ common_apt_pkgs:
   - gnupg
   - iperf3
   - ncdu
-  - nfs-common
   - speedtest-cli
   - vim-nox
