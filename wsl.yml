@@ -1,0 +1,52 @@
+---
+
+- name: Check
+  hosts: wsl
+  connection: local
+  tasks:
+    - debug: msg="ansible_user_id - {{ ansible_user_id }}"
+    - debug: msg="USER - {{ lookup('env', 'USER') }}"
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+
+- name: Setup - common/apt
+  hosts: wsl
+  connection: local
+  roles:
+    - common/apt
+  tags:
+    - apt
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+
+- name: Setup - common/docker
+  hosts: wsl
+  connection: local
+  roles:
+    - common/docker
+  tags:
+    - docker
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+
+- name: Setup - common/hashicorp
+  hosts: wsl
+  connection: local
+  roles:
+    - common/hashicorp
+  tags:
+    - hashicorp
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+
+- name: Setup - common/brew
+  hosts: wsl
+  connection: local
+  roles:
+    - common/brew
+  tags:
+    - brew

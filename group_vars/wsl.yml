@@ -1,0 +1,22 @@
+---
+
+brew_pkgs:
+  - awscli
+  - helm
+  - k9s
+  - pre-commit
+
+common_apt_extra_pkgs:
+  - composer
+  - jq
+  - net-tools
+  - php-cli
+  - php-codesniffer
+  - php-mbstring
+  - php-mysql
+  - php-xml
+  - php-zip
+  - yamllint
+
+hashicorp_pkgs:
+  - terraform

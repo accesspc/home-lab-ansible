@@ -124,3 +124,26 @@ Upgrade K8s cluster to a selected version. Follow official [Upgrading kubeadm cl
 ```bash
 ansible-playbook -i inventories/k8s.yml k8s.upgrade.yml -t upgrade -e "k8s_upgrade_version=1.30.1"
 ```
+
+## WSL
+
+Local WSL setup.
+
+### Pre-requisites (root)
+
+```bash
+apt update
+apt install -y ansible
+```
+
+### Pre-requisites (user)
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### Install
+
+```bash
+ansible-playbook -i inventories/wsl.yml wsl.yml
+```

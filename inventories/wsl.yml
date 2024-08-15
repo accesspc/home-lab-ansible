@@ -1,0 +1,9 @@
+---
+
+all:
+  hosts:
+    xps15:
+
+wsl:
+  hosts:
+    xps15:
