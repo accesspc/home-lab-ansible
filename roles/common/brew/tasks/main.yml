@@ -4,7 +4,7 @@
   lineinfile:
     path: ~/.bash_aliases
     regex: '^export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH'
-    line: export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+    line: export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 
 - name: homebrew - update && upgrade
   community.general.homebrew:
