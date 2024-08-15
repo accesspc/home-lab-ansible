@@ -1,11 +1,5 @@
 ---
 
-# Only: pve / proxmox
-- name: apt - pve
-  import_tasks:
-    pve.yml
-  when: "'pve' in group_names"
-
 # up-to-date
 - name: apt - update && dist-upgrade
   apt:
@@ -25,6 +19,12 @@
     name: "{{ common_apt_extra_pkgs }}"
     state: present
   when: common_apt_extra_pkgs is defined
+
+# Uninstall snapd
+- name: apt - snapd
+  apt:
+    name: snapd
+    state: absent
 
 # Cleanup apt
 - name: apt - remove obsolete packages
