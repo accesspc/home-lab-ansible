@@ -1,0 +1,9 @@
+---
+
+- name: shell - dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+  shell: dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+
+- name: dnf - {{ dnf_hashicorp_pkgs }}
+  dnf:
+    name: "{{ dnf_hashicorp_pkgs }}"
+    state: present
