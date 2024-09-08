@@ -12,3 +12,5 @@ common_apt_pkgs:
   - ncdu
   - speedtest-cli
   - vim-nox
+
+user_bash_file: .bash_aliases
