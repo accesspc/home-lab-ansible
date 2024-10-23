@@ -6,15 +6,19 @@ all:
       ansible_host: 77.68.30.113
     fw03:
       ansible_host: 192.168.68.13
+    fw04:
+      ansible_host: 192.168.68.14
 
 debian:
   hosts:
     fh01:
     fw03:
+    fw04:
 
 firewall:
   hosts:
     fw03:
+    fw04:
 
 # pve:
 #   hosts:
@@ -23,3 +27,4 @@ tsgw:
   hosts:
     fh01:
     fw03:
+    fw04:
