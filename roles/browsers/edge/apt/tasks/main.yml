@@ -1,0 +1,23 @@
+---
+
+- name: Get_url - microsoft signing key
+  ansible.builtin.get_url:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    dest: /tmp/microsoft.asc
+    mode: "0644"
+
+- name: Shell - gpg dearmor
+  ansible.builtin.shell: cat /tmp/microsoft.asc | gpg --dearmor > /usr/share/keyrings/microsoft.gpg
+
+- name: Apt_repository - microsoft-edge
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main
+    filename: microsoft-edge
+    state: present
+    update_cache: true
+
+- name: Apt - microsoft-edge packages
+  ansible.builtin.apt:
+    pkg:
+      - microsoft-edge-stable
+    state: present

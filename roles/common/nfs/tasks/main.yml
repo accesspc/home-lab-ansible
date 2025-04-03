@@ -1,36 +1,37 @@
 ---
 
 # Install nfs package
-- name: apt - nfs-kernel-server
-  apt:
+- name: Apt - nfs-kernel-server
+  ansible.builtin.apt:
     pkg:
       - nfs-kernel-server
     state: present
   when: "ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'"
 
-- name: yum - nfs-utils
-  yum:
+- name: Yum - nfs-utils
+  ansible.builtin.yum:
     name:
       - nfs-utils
     state: present
   when: "ansible_distribution == 'RedHat'"
 
 # Enable and start nfs-server
-- name: systemd - nfs-server
-  systemd:
+- name: Systemd - nfs-server
+  ansible.builtin.systemd:
     name: nfs-server
     enabled: true
     state: restarted
 
 # Create /data dir
-- name: file - /data
-  file:
+- name: File - /data
+  ansible.builtin.file:
     path: /data
     state: directory
+    mode: "0755"
 
 # Create /data/{subdir}
-- name: file - /data/{{ item.name }}
-  file:
+- name: File - /data/{{ item.name }}
+  ansible.builtin.file:
     path: /data/{{ item.name }}
     state: directory
     owner: "{{ item.owner }}"
@@ -38,14 +39,14 @@
   loop: "{{ nfs }}"
 
 # Set nfs exports
-- name: lineinfile - /etc/exports - {{ item.name }}
-  lineinfile:
+- name: Lineinfile - /etc/exports - {{ item.name }}
+  ansible.builtin.lineinfile:
     path: /etc/exports
     regex: '^/data/{{ item.name }}\s+.*'
     line: /data/{{ item.name }} {{ item.net }}(rw,sync,no_subtree_check,no_root_squash)
   loop: "{{ nfs }}"
 
 # Export nfs
-- name: shell - exportfs -arv
-  shell:
+- name: Shell - exportfs -arv
+  ansible.builtin.shell:
     cmd: exportfs -arv

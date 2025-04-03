@@ -1,7 +1,7 @@
 ---
 
 # Set hostname
-- name: shell - hostnamectl
-  shell:
+- name: Shell - hostnamectl
+  ansible.builtin.shell:
     cmd: hostnamectl set-hostname {{ ansible_host }}
   when: domain is defined

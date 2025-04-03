@@ -1,16 +1,16 @@
 ---
 
 # Install packages
-- name: apt - postfix packages
-  apt:
+- name: Apt - postfix packages
+  ansible.builtin.apt:
     pkg:
       - libsasl2-modules
       - postfix
     state: present
 
 # Configure postfix
-- name: shell - postconf
-  shell:
+- name: Shell - postconf
+  ansible.builtin.shell:
     cmd: >
       postconf -e "relayhost = [{{ lookup('ansible.builtin.env', 'AWS_SES_HOST') }}]:587"
       "inet_interfaces = all"
@@ -24,19 +24,19 @@
       "smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt"
 
 # Template sasl_passwd
-- name: template - /etc/postfix/sasl_passwd
-  template:
+- name: Template - /etc/postfix/sasl_passwd
+  ansible.builtin.template:
     dest: /etc/postfix/sasl_passwd
     src: sasl_passwd.j2
-    mode: 0600
+    mode: "0600"
 
 # Postmap
-- name: shell - postmap
-  shell:
+- name: Shell - postmap
+  ansible.builtin.shell:
     cmd: postmap hash:/etc/postfix/sasl_passwd
 
 # Restart posftix
-- name: systemd - postfix
-  systemd:
+- name: Systemd - postfix
+  ansible.builtin.systemd:
     name: postfix
     state: restarted

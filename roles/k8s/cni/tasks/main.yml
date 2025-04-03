@@ -2,18 +2,18 @@
 
 # CNI: Calico
 - name: K8s CNI - Calico
-  import_tasks:
+  ansible.builtin.import_tasks:
     cni.calico.yml
   when: k8s.cni.select == 'calico'
 
 # CNI: Flannel
 - name: K8s CNI - Flannel
-  import_tasks:
+  ansible.builtin.import_tasks:
     cni.flannel.yml
   when: k8s.cni.select == 'flannel'
 
 # CNI: kube-router
 - name: K8s CNI - kube-router
-  import_tasks:
+  ansible.builtin.import_tasks:
     cni.kube-router.yml
   when: k8s.cni.select == 'kube-router'

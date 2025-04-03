@@ -1,26 +1,26 @@
 ---
 
 # up-to-date
-- name: yum - upgrade
-  yum:
+- name: Yum - upgrade
+  ansible.builtin.yum:
     name: "*"
     state: latest
 
 # Install common packages
-- name: yum - common packages
-  yum:
+- name: Yum - common packages
+  ansible.builtin.yum:
     name: "{{ common_yum_pkgs }}"
     state: present
   when: common_yum_pkgs is defined
 
 # Install common extra packages
-- name: yum - common extra packages
-  yum:
+- name: Yum - common extra packages
+  ansible.builtin.yum:
     name: "{{ common_yum_extra_pkgs }}"
     state: present
   when: common_yum_extra_pkgs is defined
 
 # Cleanup yum
-- name: yum - autoremove
-  yum:
+- name: Yum - autoremove
+  ansible.builtin.yum:
     autoremove: true

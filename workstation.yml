@@ -1,0 +1,40 @@
+---
+
+- name: Workstation - common
+  hosts: workstation
+  connection: local
+  roles:
+    - common/apt
+  tags:
+    - always
+    - common
+
+- name: Workstation - browsers
+  hosts: workstation
+  connection: local
+  roles:
+    - browsers/brave/apt
+    - browsers/chrome/apt
+    - browsers/edge/apt
+  tags:
+    - browsers
+
+- name: Workstation - tools
+  hosts: workstation
+  connection: local
+  roles:
+    - docker/apt
+    - hashicorp/apt
+    - helm/apt
+    - vscode/apt
+  tags:
+    - tools
+
+- name: Workstation - opt:sw:blender
+  hosts: workstation
+  connection: local
+  roles:
+    - blender
+  tags:
+    - sw
+    - blender

@@ -1,21 +1,22 @@
 ---
 
-- name: get_url - hashicorp key
-  get_url:
+- name: Get_url - hashicorp key
+  ansible.builtin.get_url:
     url: https://apt.releases.hashicorp.com/gpg
     dest: /tmp/hashicorp.asc
+    mode: "0644"
 
-- name: shell - gpg dearmor
-  shell: cat /tmp/hashicorp.asc | gpg --dearmor > /usr/share/keyrings/hashicorp-archive-keyring.gpg
+- name: Shell - gpg dearmor
+  ansible.builtin.shell: cat /tmp/hashicorp.asc | gpg --dearmor > /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
-- name: apt_repository - hashicorp
-  apt_repository:
+- name: Apt_repository - hashicorp
+  ansible.builtin.apt_repository:
     repo: deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
     filename: hashicorp
     state: present
     update_cache: true
 
-- name: apt - hashicorp packages
-  apt:
+- name: Apt - hashicorp packages
+  ansible.builtin.apt:
     name: "{{ hashicorp_pkgs }}"
     state: present

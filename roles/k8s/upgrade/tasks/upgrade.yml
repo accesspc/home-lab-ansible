@@ -1,71 +1,72 @@
 ---
 
 # Set k8s_release
-- name: set_fact - k8s_release
-  set_fact:
+- name: Set_fact - k8s_release
+  ansible.builtin.set_fact:
     k8s_release: "{{ k8s_upgrade_version | regex_replace('^(.*)\\.\\d+$', '\\1') }}"
 
 # Update yum repo
-- name: template - yum kubernetes repo
-  template:
+- name: Template - yum kubernetes repo
+  ansible.builtin.template:
     src: ../../setup/templates/etc/yum.repos.d/kubernetes.repo.j2
     dest: /etc/yum.repos.d/kubernetes.repo
+    mode: "0644"
   when: "ansible_distribution == 'RedHat'"
 
 # Update kubeadm
-- name: yum - kubeadm
-  yum:
+- name: Yum - kubeadm
+  ansible.builtin.yum:
     name: kubeadm-{{ k8s_upgrade_version }}
     state: present
 
 # kubeadm pgrade plan
-- name: shell - kubeadm upgrade plan v{{ k8s_upgrade_version }}
-  shell: kubeadm upgrade plan v{{ k8s_upgrade_version }}
+- name: Shell - kubeadm upgrade plan v{{ k8s_upgrade_version }}
+  ansible.builtin.shell: kubeadm upgrade plan v{{ k8s_upgrade_version }}
   register: kubeadm_upgrade_plan
   when: "ansible_host == groups['control'][0]"
 
 - debug: msg={{ kubeadm_upgrade_plan }}
 
 # kubeadm upgrade
-- name: shell - kubeadm upgrade apply v{{ k8s_upgrade_version }} -y
-  shell: kubeadm upgrade apply v{{ k8s_upgrade_version }} -y
+- name: Shell - kubeadm upgrade apply v{{ k8s_upgrade_version }} -y
+  ansible.builtin.shell: kubeadm upgrade apply v{{ k8s_upgrade_version }} -y
   register: kubeadm_upgrade
   when: "ansible_host == groups['control'][0]"
 
-- name: shell - kubeadm upgrade node
-  shell: kubeadm upgrade node
+- name: Shell - kubeadm upgrade node
+  ansible.builtin.shell: kubeadm upgrade node
   register: kubeadm_upgrade
   when: "ansible_host != groups['control'][0]"
 
 - debug: msg={{ kubeadm_upgrade }}
 
 # kubectl drain node
-- name: shell - kubectl drain {{ ansible_host }} --ignore-daemonsets --delete-emptydir-data
-  shell: kubectl drain {{ ansible_host }} --ignore-daemonsets --delete-emptydir-data
+- name: Shell - kubectl drain {{ ansible_host }} --ignore-daemonsets --delete-emptydir-data
+  ansible.builtin.shell: kubectl drain {{ ansible_host }} --ignore-daemonsets --delete-emptydir-data
   delegate_to: "{{ groups['control'][0] }}"
   register: kubeadm_drain
 
 - debug: msg={{ kubeadm_drain }}
 
 # Update kubectl kubelet
-- name: yum - kubectl kubelet
-  yum:
+- name: Yum - kubectl kubelet
+  ansible.builtin.yum:
     name:
       - kubectl-{{ k8s_upgrade_version }}
       - kubelet-{{ k8s_upgrade_version }}
     state: present
 
 # Systemd restart kubelet
-- name: systemd - kubelet
-  systemd:
+- name: Systemd - kubelet
+  ansible.builtin.systemd:
     name: kubelet
     daemon_reload: true
     enabled: true
     state: restarted
 
 # kubectl uncordon
-- name: shell - kubectl uncordon {{ ansible_host }}
-  shell: kubectl uncordon {{ ansible_host }}
+- name: Shell - kubectl uncordon {{ ansible_host }}
+  ansible.builtin.shell: kubectl uncordon {{ ansible_host }}
   delegate_to: "{{ groups['control'][0] }}"
   register: kubeadm_uncordon
 

@@ -1,8 +1,8 @@
 ---
 
 # Get docker repo GPG key
-- name: get_url - docker gpg apt_key
-  get_url:
+- name: Get_url - docker gpg apt_key
+  ansible.builtin.get_url:
     url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
     dest: /etc/apt/trusted.gpg.d/docker.asc
     mode: 0644
@@ -10,8 +10,8 @@
   when: "ansible_distribution == 'Ubuntu'"
 
 # Create docker repo
-- name: apt_repository - docker
-  apt_repository:
+- name: Apt_repository - docker
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
     filename: docker
     state: present
@@ -25,36 +25,36 @@
   when: "ansible_distribution == 'RedHat'"
 
 # Install containerd.io
-- name: apt - containerd.io package
-  apt:
+- name: Apt - containerd.io package
+  ansible.builtin.apt:
     pkg:
       - containerd.io
     state: present
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: yum - containerd.io package
-  yum:
+- name: Yum - containerd.io package
+  ansible.builtin.yum:
     name: containerd.io
     state: present
   when: "ansible_distribution == 'RedHat'"
 
 # Systemd containerd
-- name: systemd - containerd
-  systemd:
+- name: Systemd - containerd
+  ansible.builtin.systemd:
     name: containerd
     daemon_reload: true
     enabled: true
     state: restarted
 
 # mkdir
-- name: file - /etc/containerd
-  file:
+- name: File - /etc/containerd
+  ansible.builtin.file:
     path: /etc/containerd
     state: directory
     mode: 0755
   when: "ansible_distribution == 'Ubuntu'"
 
 # Generate default config file
-- name: shell - containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = {{ lookup('ansible.builtin.vars', 'k8s_cgroup_' + ansible_distribution) }}/g' > /etc/containerd/config.toml
-  shell: containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = {{ lookup('ansible.builtin.vars', 'k8s_cgroup_' + ansible_distribution) }}/g' > /etc/containerd/config.toml
+- name: Shell - containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = {{ lookup('ansible.builtin.vars', 'k8s_cgroup_' + ansible_distribution) }}/g' > /etc/containerd/config.toml
+  ansible.builtin.shell: containerd config default | sed 's/SystemdCgroup =.*/SystemdCgroup = {{ lookup('ansible.builtin.vars', 'k8s_cgroup_' + ansible_distribution) }}/g' > /etc/containerd/config.toml
   when: "ansible_distribution == 'RedHat'"

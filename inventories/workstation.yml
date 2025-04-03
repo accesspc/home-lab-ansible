@@ -1,0 +1,9 @@
+---
+
+all:
+  hosts:
+    xps15:
+
+workstation:
+  hosts:
+    xps15:

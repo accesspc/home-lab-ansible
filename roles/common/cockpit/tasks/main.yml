@@ -1,18 +1,18 @@
 ---
 
-- name: yum - install cockpit-pcp
-  yum:
+- name: Yum - install cockpit-pcp
+  ansible.builtin.yum:
     name: cockpit-pcp
     state: present
 
-- name: systemd - cockpit.socket
-  systemd:
+- name: Systemd - cockpit.socket
+  ansible.builtin.systemd:
     name: cockpit.socket
     enabled: true
     state: restarted
 
-- name: systemd - pmlogger.service
-  systemd:
+- name: Systemd - pmlogger.service
+  ansible.builtin.systemd:
     name: pmlogger.service
     enabled: true
     state: restarted

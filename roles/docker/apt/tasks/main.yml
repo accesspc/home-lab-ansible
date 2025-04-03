@@ -1,21 +1,21 @@
 ---
 
-- name: get_url - docker gpg apt_key
-  get_url:
+- name: Get_url - docker gpg apt_key
+  ansible.builtin.get_url:
     url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
-    dest: /etc/apt/trusted.gpg.d/docker.asc
-    mode: 0644
+    dest: /etc/apt/keyrings/docker.asc
+    mode: "0644"
     force: true
 
-- name: apt_repository - docker
-  apt_repository:
-    repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
+- name: Apt_repository - docker
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
     filename: docker
     state: present
     update_cache: true
 
-- name: apt - docker packages
-  apt:
+- name: Apt - docker packages
+  ansible.builtin.apt:
     pkg:
       - docker-ce
       - docker-ce-cli
@@ -24,7 +24,7 @@
       - docker-compose-plugin
     state: present
 
-- name: user - add to docker group
+- name: User - add to docker group
   user:
     append: true
     groups: docker

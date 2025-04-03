@@ -8,9 +8,7 @@ common_apt_pkgs:
   - ca-certificates
   - curl
   - gnupg
-  - iperf3
   - ncdu
-  - speedtest-cli
   - vim-nox
 
 user_bash_file: .bash_aliases

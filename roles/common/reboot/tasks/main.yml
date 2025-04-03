@@ -1,5 +1,5 @@
 ---
 
 # Reboot
-- name: reboot
-  reboot: {}
+- name: Reboot
+  ansible.buildtin.reboot: {}

@@ -1,10 +1,10 @@
 ---
 
-- name: shell - dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-  shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+- name: Shell - dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+  ansible.builtin.shell: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
-- name: dnf - docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-  dnf:
+- name: Dnf - docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  ansible.builtin.dnf:
     name:
       - docker-ce
       - docker-ce-cli
@@ -13,8 +13,8 @@
       - docker-compose-plugin
     state: present
 
-- name: user - add to docker group
-  user:
+- name: User - add to docker group
+  ansible.builtin.user:
     append: true
     groups: docker
     name: "{{ lookup('env', 'USER') }}"

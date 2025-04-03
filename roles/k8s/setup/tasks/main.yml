@@ -1,7 +1,7 @@
 ---
 
 # Check state file
-- name: stat - /root/.state.cluster.setup
+- name: Stat - /root/.state.cluster.setup
   stat:
     path: /root/.state.cluster.setup
   register: cluster_setup
@@ -41,7 +41,7 @@
     - k8s
 
 # Setup FirewallD
-- name: firewalld rules
+- name: Firewalld rules
   import_tasks:
     firewall.yml
   tags:
@@ -50,7 +50,7 @@
   when: "ansible_distribution == 'RedHat'"
 
 # Touch state file
-- name: file - touch /root/.state.cluster.setup
-  file:
+- name: File - touch /root/.state.cluster.setup
+  ansible.builtin.file:
     path: /root/.state.cluster.setup
     state: touch

@@ -1,0 +1,22 @@
+---
+
+- name: Get_url - helm signing key
+  ansible.builtin.get_url:
+    url: https://baltocdn.com/helm/signing.asc
+    dest: /tmp/helm.asc
+
+- name: Shell - gpg dearmor
+  ansible.builtin.shell: cat /tmp/helm.asc | gpg --dearmor > /usr/share/keyrings/helm.gpg
+
+- name: Apt_repository - helm
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/{{ ansible_distribution | lower }}/ all main
+    filename: helm
+    state: present
+    update_cache: true
+
+- name: Apt - helm packages
+  ansible.builtin.apt:
+    pkg:
+      - helm
+    state: present

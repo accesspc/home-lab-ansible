@@ -1,8 +1,8 @@
 ---
 
 # Init kube cluster
-- name: shell - kubeadm init --pod-network-cidr {{ k8s.network_cidr }} --kubernetes-version {{ k8s.version }}
-  shell: kubeadm init --pod-network-cidr {{ k8s.network_cidr }} --kubernetes-version {{ k8s.version }}
+- name: Shell - kubeadm init --pod-network-cidr {{ k8s.network_cidr }} --kubernetes-version {{ k8s.version }}
+  ansible.builtin.shell: kubeadm init --pod-network-cidr {{ k8s.network_cidr }} --kubernetes-version {{ k8s.version }}
   register: kubeadm_init_output
 
 - debug: msg="{{ kubeadm_init_output.stdout_lines }}"
@@ -10,14 +10,14 @@
 - debug: msg="{{ kubeadm_init_output.stderr_lines }}"
 
 # Touch state file
-- name: file - touch /root/.state.cluster.init
-  file:
+- name: File - touch /root/.state.cluster.init
+  ansible.builtin.file:
     path: /root/.state.cluster.init
     state: touch
 
 # Setup kube config for root
-- name: file - /root/.kube
-  file:
+- name: File - /root/.kube
+  ansible.builtin.file:
     path: /root/.kube
     state: directory
 
@@ -29,8 +29,8 @@
     remote_src: true
 
 # Setup kube config for ansible_user
-- name: file - /home/{{ ansible_user }}/.kube
-  file:
+- name: File - /home/{{ ansible_user }}/.kube
+  ansible.builtin.file:
     path: /home/{{ ansible_user }}/.kube
     state: directory
     owner: "{{ ansible_user }}"

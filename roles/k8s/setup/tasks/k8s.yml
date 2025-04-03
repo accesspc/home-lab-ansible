@@ -1,37 +1,37 @@
 ---
 
-- name: set_fact - k8s_apt_version
+- name: Set_fact - k8s_apt_version
   set_fact:
     k8s_apt_version: "{{ k8s.version }}-1.1"
 
-- name: set_fact - k8s_release
+- name: Set_fact - k8s_release
   set_fact:
     k8s_release: "{{ k8s.version | regex_replace('^(.*)\\.\\d+$', '\\1') }}"
 
 # Get kubernetes repo GPG key
-- name: get_url - k8s key
-  get_url:
+- name: Get_url - k8s key
+  ansible.builtin.get_url:
     url: https://pkgs.k8s.io/core:/stable:/v{{ k8s_release }}/deb/Release.key
     dest: /etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc
   when: "ansible_distribution == 'Ubuntu'"
 
 # Create kubernetes repo
-- name: apt_repository - k8s
-  apt_repository:
+- name: Apt_repository - k8s
+  ansible.builtin.apt_repository:
     repo: deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v{{ k8s_release }}/deb/ /
     filename: kubernetes
     state: present
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: template - yum kubernetes repo
-  template:
+- name: Template - yum kubernetes repo
+  ansible.builtin.template:
     src: etc/yum.repos.d/kubernetes.repo.j2
     dest: /etc/yum.repos.d/kubernetes.repo
   when: "ansible_distribution == 'RedHat'"
 
 # Install kube packages
-- name: apt - k8s packages
-  apt:
+- name: Apt - k8s packages
+  ansible.builtin.apt:
     pkg:
       - kubeadm={{ k8s_apt_version }}
       - kubectl={{ k8s_apt_version }}
@@ -40,8 +40,8 @@
     update_cache: true
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: yum - kubeadm
-  yum:
+- name: Yum - kubeadm
+  ansible.builtin.yum:
     name:
       - kubeadm-{{ k8s.version }}
       - kubectl-{{ k8s.version }}
@@ -51,16 +51,16 @@
   when: "ansible_distribution == 'RedHat'"
 
 # Install nfs package to support nfs mounts
-- name: apt - nfs-common
-  apt:
+- name: Apt - nfs-common
+  ansible.builtin.apt:
     pkg:
       - nfs-common
     state: present
     update_cache: true
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: yum - nfs-utils
-  yum:
+- name: Yum - nfs-utils
+  ansible.builtin.yum:
     name:
       - nfs-utils
     state: present
@@ -78,8 +78,8 @@
   when: "ansible_distribution == 'Ubuntu'"
 
 # Systemd kubelet
-- name: systemd - kubelet
-  systemd:
+- name: Systemd - kubelet
+  ansible.builtin.systemd:
     name: kubelet
     daemon_reload: true
     enabled: true

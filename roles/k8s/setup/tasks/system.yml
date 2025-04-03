@@ -13,18 +13,18 @@
     dest: /etc/sysctl.d/99-kubernetes-cri.conf
 
 # Swap off
-- name: lineinfile - .*swap.*
-  lineinfile:
+- name: Lineinfile - .*swap.*
+  ansible.builtin.lineinfile:
     path: /etc/fstab
     regex: '^#?(.*swap.*)'
     line: '#\1'
     backrefs: true
 
-- name: shell - swapoff -a
-  shell: swapoff -a
+- name: Shell - swapoff -a
+  ansible.builtin.shell: swapoff -a
 
-- name: file - /swap.img
-  file:
+- name: File - /swap.img
+  ansible.builtin.file:
     path: /swap.img
     state: absent
   when: "ansible_distribution == 'Ubuntu'"
@@ -32,8 +32,8 @@
 # TBD: Swap for RedHat
 
 # TBD: SElinux
-- name: lineinfile - SELINUX=permissive
-  lineinfile:
+- name: Lineinfile - SELINUX=permissive
+  ansible.builtin.lineinfile:
     path: /etc/selinux/config
     regex: '^SELINUX=.*'
     line: 'SELINUX=permissive'

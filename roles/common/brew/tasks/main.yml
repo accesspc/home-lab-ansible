@@ -1,16 +1,16 @@
 ---
 
-- name: lineinfile - ~/{{ user_bash_file }} - brew
-  lineinfile:
+- name: Lineinfile - ~/{{ user_bash_file }}
+  ansible.builtin.lineinfile:
     path: ~/{{ user_bash_file }}
     regex: '^export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin'
     line: export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 
-- name: homebrew - update && upgrade
+- name: Homebrew - update && upgrade
   community.general.homebrew:
     update_homebrew: true
     upgrade_all: true
 
-- name: homebrew - pkgs
+- name: Homebrew - pkgs
   community.general.homebrew:
     name: "{{ brew_pkgs }}"

@@ -1,33 +1,42 @@
 ---
 
+
+# # Update source
+# - name: Lineinfile - /etc/apt/sources.list
+#   ansible.builtin.lineinfile:
+#     path: /etc/apt/sources.list
+#     regex: 'main non-free-firmware'
+#     line: 'main contrib non-free non-free-firmware'
+#   when: "ansible_distribution == 'Debian'"
+
 # up-to-date
-- name: apt - update && dist-upgrade
-  apt:
+- name: Apt - update && dist-upgrade
+  ansible.builtin.apt:
     update_cache: true
     upgrade: dist
     force: true
 
 # Install common packages
-- name: apt - common packages
-  apt:
+- name: Apt - common packages
+  ansible.builtin.apt:
     name: "{{ common_apt_pkgs }}"
     state: present
 
 # Install common extra packages
-- name: apt - common extra packages
-  apt:
+- name: Apt - common extra packages
+  ansible.builtin.apt:
     name: "{{ common_apt_extra_pkgs }}"
     state: present
   when: common_apt_extra_pkgs is defined
 
 # Uninstall snapd
-- name: apt - snapd
-  apt:
-    name: snapd
+- name: Apt - snapd
+  ansible.builtin.apt:
+    name: Snapd
     state: absent
 
 # Cleanup apt
-- name: apt - remove obsolete packages
-  apt:
+- name: Apt - remove obsolete packages
+  ansible.builtin.apt:
     autoremove: true
     purge: true

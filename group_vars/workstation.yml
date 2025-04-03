@@ -1,0 +1,43 @@
+---
+
+ansible_become: true
+ansible_become_method: sudo
+
+# common
+common_apt_extra_pkgs:
+  # essentials
+  - apt-transport-https
+  - bash-completion
+  - build-essential
+  - ncdu
+  - ostree
+  - pkexec
+  - screen
+  - vim-nox
+  - wget
+  # drivers
+  - nvidia-driver
+  # browsers
+  - chromium
+  # multimedia
+  - ffmpeg
+  # tools
+  - yamllint
+
+# hashicorp
+hashicorp_pkgs:
+  - terraform
+
+# optional software
+opt:
+  dir: /mnt/data/opt
+  uid: 1000
+  gid: 1000
+  user: robertas
+
+# blender
+blender:
+  bin: ~/bin
+  dir: /mnt/data/opt
+  release: 4.4
+  version: 4.4.0

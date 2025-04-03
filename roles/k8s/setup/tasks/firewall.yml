@@ -1,6 +1,6 @@
 ---
 
-- name: firewalld - ports
+- name: Firewalld - ports
   firewalld:
     immediate: true
     permanent: true
@@ -8,7 +8,7 @@
     state: enabled
   with_items: "{{ k8s.firewalld.ports }}"
 
-- name: firewalld - trusted sources
+- name: Firewalld - trusted sources
   firewalld:
     immediate: true
     permanent: true
@@ -17,7 +17,7 @@
     zone: trusted
   with_items: "{{ k8s.firewalld.trusted_sources }}"
 
-- name: firewalld - network_cidr
+- name: Firewalld - network_cidr
   firewalld:
     immediate: true
     permanent: true
@@ -26,8 +26,8 @@
     zone: trusted
   with_items: "{{ k8s.network_cidr }}"
 
-- name: systemd - firewalld
-  systemd:
-    name: firewalld
+- name: Systemd - firewalld
+  ansible.builtin.systemd:
+    name: Firewalld
     enabled: true
     state: restarted

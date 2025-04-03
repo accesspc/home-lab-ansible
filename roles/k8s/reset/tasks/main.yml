@@ -1,8 +1,8 @@
 ---
 
 # Reset kubeadm and print output
-- name: shell - kubeadm reset --force
-  shell: kubeadm reset --force
+- name: Shell - kubeadm reset --force
+  ansible.builtin.shell: kubeadm reset --force
   register: kube_reset_status
   ignore_errors: true
 
@@ -21,8 +21,8 @@
     - kubelet
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: apt - kubeadm kubectl kubelet
-  apt:
+- name: Apt - kubeadm kubectl kubelet
+  ansible.builtin.apt:
     name:
       - containerd.io
       - kubeadm
@@ -31,8 +31,8 @@
     state: absent
   when: "ansible_distribution == 'Ubuntu'"
 
-- name: yum - kubeadm kubectl kubelet
-  yum:
+- name: Yum - kubeadm kubectl kubelet
+  ansible.builtin.yum:
     name:
       - containerd.io
       - kubeadm
@@ -42,8 +42,8 @@
   when: "ansible_distribution == 'RedHat'"
 
 # Remove files and directories
-- name: file - loop pkgs files and dirs
-  file:
+- name: File - loop pkgs files and dirs
+  ansible.builtin.file:
     path: "{{ item }}"
     state: absent
   with_items:
@@ -56,8 +56,8 @@
     - /var/log/calico
     - /var/log/pods
 
-- name: file - loop state files
-  file:
+- name: File - loop state files
+  ansible.builtin.file:
     path: "{{ item }}"
     state: absent
   with_items:
