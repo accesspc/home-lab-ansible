@@ -9,12 +9,14 @@ common_apt_extra_pkgs:
   - apt-transport-https
   - bash-completion
   - build-essential
+  - kubuntu-restricted-extras
   - ncdu
   - ostree
   - partitionmanager
   - plasma-discover-backend-flatpak
   - screen
   - vim-nox
+  - vlc
   # drivers
   # - nvidia-driver
   # browsers

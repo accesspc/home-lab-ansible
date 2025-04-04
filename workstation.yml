@@ -24,7 +24,7 @@
     - browsers/brave/apt
   tags:
     - browsers
-    - brave
+    - browsers:brave
 
 - name: Workstation - browsers:chrome
   hosts: workstation
@@ -33,7 +33,7 @@
     - browsers/chrome/apt
   tags:
     - browsers
-    - chrome
+    - browsers:chrome
 
 - name: Workstation - browsers:edge
   hosts: workstation
@@ -42,7 +42,16 @@
     - browsers/edge/apt
   tags:
     - browsers
-    - edge
+    - browsers:edge
+
+- name: Workstation - browsers:firefox
+  hosts: workstation
+  connection: local
+  roles:
+    - browsers/firefox/apt
+  tags:
+    - browsers
+    - browsers:firefox
 
 - name: Workstation - tools:docker
   hosts: workstation
@@ -51,7 +60,7 @@
     - docker/apt
   tags:
     - tools
-    - docker
+    - tools:docker
 
 - name: Workstation - tools:hashicorp
   hosts: workstation
@@ -60,7 +69,7 @@
     - hashicorp/apt
   tags:
     - tools
-    - hashicorp
+    - tools:hashicorp
 
 - name: Workstation - tools:helm
   hosts: workstation
@@ -69,7 +78,7 @@
     - helm/apt
   tags:
     - tools
-    - helm
+    - tools:helm
 
 
 - name: Workstation - tools:vscode
@@ -79,7 +88,7 @@
     - vscode/apt
   tags:
     - tools
-    - vscode
+    - tools:vscode
 
 - name: Workstation - sw:blender
   hosts: workstation
@@ -88,4 +97,4 @@
     - blender
   tags:
     - sw
-    - blender
+    - sw:blender

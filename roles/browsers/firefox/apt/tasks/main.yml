@@ -1,0 +1,27 @@
+---
+
+- name: Get_url - firefox signing key
+  ansible.builtin.get_url:
+    url: https://packages.mozilla.org/apt/repo-signing-key.gpg
+    dest: /etc/apt/keyrings/packages.mozilla.org.asc
+    mode: "0644"
+    force: true
+
+- name: Apt_repository - firefox
+  ansible.builtin.apt_repository:
+    repo: deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main
+    filename: mozilla
+    state: present
+    update_cache: true
+
+- name: Copy - mozilla preferences
+  ansible.builtin.copy:
+    src: mozilla
+    dest: /etc/apt/preferences.d/mozilla
+    mode: "0644"
+
+- name: Apt - firefox packages
+  ansible.builtin.apt:
+    pkg:
+      - firefox
+    state: present
