@@ -10,7 +10,7 @@
 
 - name: Apt_repository - helm
   ansible.builtin.apt_repository:
-    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/{{ ansible_distribution | lower }}/ all main
+    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main
     filename: helm
     state: present
     update_cache: true

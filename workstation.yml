@@ -6,31 +6,82 @@
   roles:
     - common/apt
   tags:
-    - always
+    # - always
     - common
 
-- name: Workstation - browsers
+- name: Workstation - flatpak
+  hosts: workstation
+  connection: local
+  roles:
+    - flatpak
+  tags:
+    - flatpak
+
+- name: Workstation - browsers:brave
   hosts: workstation
   connection: local
   roles:
     - browsers/brave/apt
+  tags:
+    - browsers
+    - brave
+
+- name: Workstation - browsers:chrome
+  hosts: workstation
+  connection: local
+  roles:
     - browsers/chrome/apt
+  tags:
+    - browsers
+    - chrome
+
+- name: Workstation - browsers:edge
+  hosts: workstation
+  connection: local
+  roles:
     - browsers/edge/apt
   tags:
     - browsers
+    - edge
 
-- name: Workstation - tools
+- name: Workstation - tools:docker
   hosts: workstation
   connection: local
   roles:
     - docker/apt
+  tags:
+    - tools
+    - docker
+
+- name: Workstation - tools:hashicorp
+  hosts: workstation
+  connection: local
+  roles:
     - hashicorp/apt
+  tags:
+    - tools
+    - hashicorp
+
+- name: Workstation - tools:helm
+  hosts: workstation
+  connection: local
+  roles:
     - helm/apt
+  tags:
+    - tools
+    - helm
+
+
+- name: Workstation - tools:vscode
+  hosts: workstation
+  connection: local
+  roles:
     - vscode/apt
   tags:
     - tools
+    - vscode
 
-- name: Workstation - opt:sw:blender
+- name: Workstation - sw:blender
   hosts: workstation
   connection: local
   roles:

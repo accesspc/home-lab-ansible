@@ -11,18 +11,24 @@ common_apt_extra_pkgs:
   - build-essential
   - ncdu
   - ostree
-  - pkexec
+  - partitionmanager
+  - plasma-discover-backend-flatpak
   - screen
   - vim-nox
-  - wget
   # drivers
-  - nvidia-driver
+  # - nvidia-driver
   # browsers
-  - chromium
+  # - chromium
+  # - firefox
   # multimedia
   - ffmpeg
   # tools
   - yamllint
+
+flatpak_pkgs:
+  - org.darktable.Darktable
+  - org.inkscape.Inkscape
+  - org.kde.krita
 
 # hashicorp
 hashicorp_pkgs:
@@ -30,7 +36,7 @@ hashicorp_pkgs:
 
 # optional software
 opt:
-  dir: /mnt/data/opt
+  dir: /data/opt
   uid: 1000
   gid: 1000
   user: robertas
@@ -38,6 +44,6 @@ opt:
 # blender
 blender:
   bin: ~/bin
-  dir: /mnt/data/opt
+  dir: /data/opt
   release: 4.4
   version: 4.4.0

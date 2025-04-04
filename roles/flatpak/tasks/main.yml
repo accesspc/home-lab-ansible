@@ -1,0 +1,6 @@
+---
+
+- name: Flatpak packages
+  community.general.flatpak:
+    name: "{{ flatpak_pkgs }}"
+    state: present
