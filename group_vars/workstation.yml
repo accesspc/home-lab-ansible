@@ -9,6 +9,7 @@ common_apt_extra_pkgs:
   - apt-transport-https
   - bash-completion
   - build-essential
+  - kdenlive
   - kubuntu-restricted-extras
   - ncdu
   - okular
@@ -30,6 +31,7 @@ common_apt_extra_pkgs:
 
 flatpak_pkgs:
   - org.darktable.Darktable
+  - org.gimp.GIMP
   - org.inkscape.Inkscape
   - org.kde.krita
 
