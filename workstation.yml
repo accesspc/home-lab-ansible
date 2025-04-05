@@ -98,3 +98,12 @@
   tags:
     - sw
     - sw:blender
+
+- name: Workstation - sw:slack
+  hosts: workstation
+  connection: local
+  roles:
+    - slack
+  tags:
+    - sw
+    - sw:slack

@@ -11,6 +11,7 @@ common_apt_extra_pkgs:
   - build-essential
   - kubuntu-restricted-extras
   - ncdu
+  - okular
   - ostree
   - partitionmanager
   - plasma-discover-backend-flatpak
@@ -45,7 +46,8 @@ opt:
 
 # blender
 blender:
-  bin: ~/bin
-  dir: /data/opt
   release: 4.4
   version: 4.4.0
+
+slack:
+  version: 4.41.105
