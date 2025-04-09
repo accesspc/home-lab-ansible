@@ -18,12 +18,8 @@ common_apt_extra_pkgs:
   - plasma-discover-backend-flatpak
   - screen
   - vim-nox
+  - virt-manager
   - vlc
-  # drivers
-  # - nvidia-driver
-  # browsers
-  # - chromium
-  # - firefox
   # multimedia
   - ffmpeg
   # tools
