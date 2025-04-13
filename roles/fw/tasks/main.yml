@@ -12,5 +12,8 @@
     dhcp.yml
 
 # iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+# iptables -A FORWARD -i enp0s13f0u3u4 -o wg0 -j ACCEPT
 # iptables -A FORWARD -i enp0s13f0u3u4 -o wlp0s20f3 -j ACCEPT
+
 # iptables -t nat -A POSTROUTING -o wlp0s20f3 -j MASQUERADE
