@@ -1,0 +1,24 @@
+---
+
+- name: Apt - dhcp-server
+  ansible.builtin.apt:
+    name: isc-dhcp-server
+    state: present
+
+- name: Template - /etc/dhcp/dhcpd.conf
+  ansible.builtin.template:
+    src: dhcpd.conf.j2
+    dest: /etc/dhcp/dhcpd.conf
+    mode: "0644"
+
+- name: Lineinfile - /etc/default/isc-dhcp-server
+  ansible.builtin.lineinfile:
+    path: /etc/default/isc-dhcp-server
+    regex: '^INTERFACESv4=.*'
+    line: 'INTERFACESv4="{{ fw.interface }}"'
+
+- name: Systemd - isc-dhcp-server.service
+  ansible.builtin.systemd:
+    name: isc-dhcp-server.service
+    enabled: false
+    state: restarted

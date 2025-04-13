@@ -1,0 +1,11 @@
+---
+
+- name: net.ipv4.ip_forward
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+
+- name: net.ipv6.conf.all.forwarding
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.all.forwarding
+    value: 1

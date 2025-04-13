@@ -26,6 +26,7 @@ common_apt_extra_pkgs:
   # tools
   - yamllint
 
+# flatpak
 flatpak_pkgs:
   - org.chromium.Chromium
   - org.darktable.Darktable
@@ -34,27 +35,42 @@ flatpak_pkgs:
   - org.kde.krita
   - org.qbittorrent.qBittorrent
 
-# optional software
+# extra
 opt:
   dir: /data/opt
   uid: 1000
   gid: 1000
   user: robertas
 
-# blender
+# fw
+fw:
+  dhcp:
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    domain: reiciunas.dev
+    subnet:
+      address: 172.31.0.0
+      netmask: 255.255.255.0
+      range: 172.31.0.64 172.31.0.91
+  interface: enp0s13f0u3u4
+  ip: 172.31.0.1
+  mask: 24
+
+# tools:blender
 blender:
   release: 4.4
   version: 4.4.0
 
-# hashicorp
+# tools:hashicorp
 hashicorp_pkgs:
   - terraform
 
-# slack
+# tools:slack
 slack:
   version: 4.41.105
 
-# wireguard
+# tools:wireguard
 wireguard:
   interface:
     address: 172.31.255.3/24

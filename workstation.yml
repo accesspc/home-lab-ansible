@@ -53,6 +53,23 @@
     - browsers
     - browsers:firefox
 
+- name: Workstation - fw
+  hosts: workstation
+  connection: local
+  roles:
+    - fw
+  tags:
+    - fw
+
+- name: Workstation - tools:blender
+  hosts: workstation
+  connection: local
+  roles:
+    - blender
+  tags:
+    - tools
+    - tools:blender
+
 - name: Workstation - tools:docker
   hosts: workstation
   connection: local
@@ -80,6 +97,15 @@
     - tools
     - tools:helm
 
+- name: Workstation - tools:slack
+  hosts: workstation
+  connection: local
+  roles:
+    - slack
+  tags:
+    - tools
+    - tools:slack
+
 - name: Workstation - tools:vscode
   hosts: workstation
   connection: local
@@ -97,21 +123,3 @@
   tags:
     - tools
     - tools:wireguard
-
-- name: Workstation - sw:blender
-  hosts: workstation
-  connection: local
-  roles:
-    - blender
-  tags:
-    - sw
-    - sw:blender
-
-- name: Workstation - sw:slack
-  hosts: workstation
-  connection: local
-  roles:
-    - slack
-  tags:
-    - sw
-    - sw:slack

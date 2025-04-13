@@ -1,0 +1,13 @@
+# dhcpd.conf
+option domain-name "{{ fw.dhcp.domain }}";
+option domain-name-servers {{ fw.dhcp.dns | join(', ') }};
+
+default-lease-time 600;
+max-lease-time 7200;
+
+ddns-update-style none;
+
+subnet {{ fw.dhcp.subnet.address }} netmask {{ fw.dhcp.subnet.netmask }} {
+  range {{ fw.dhcp.subnet.range }};
+  option routers {{ fw.ip }};
+}
