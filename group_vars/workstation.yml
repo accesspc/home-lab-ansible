@@ -22,14 +22,18 @@ common_apt_extra_pkgs:
   - vlc
   # multimedia
   - ffmpeg
+  - yt-dlp
   # tools
+  - wireguard-tools
   - yamllint
 
 flatpak_pkgs:
+  - org.chromium.Chromium
   - org.darktable.Darktable
   - org.gimp.GIMP
   - org.inkscape.Inkscape
   - org.kde.krita
+  - org.qbittorrent.qBittorrent
 
 # hashicorp
 hashicorp_pkgs:
