@@ -1,0 +1,12 @@
+[Interface]
+Address = {{ wireguard.interface.address }}
+PrivateKey = {{ priv_key.stdout }}
+PostUp = iptables -t nat -A POSTROUTING -o {{ wireguard.interface.name }} -j MASQUERADE
+PostDown = iptables -t nat -D POSTROUTING -o {{ wireguard.interface.name }} -j MASQUERADE
+
+# {{ wireguard.peer.name }}
+[Peer]
+PublicKey = {{ peer_pub_key.stdout }}
+Endpoint = {{ wireguard.peer.endpoint }}
+AllowedIPs = {{ wireguard.peer.allowedIPs }}
+PersistentKeepalive = {{ wireguard.peer.keepAlive }}

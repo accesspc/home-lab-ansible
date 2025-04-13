@@ -80,7 +80,6 @@
     - tools
     - tools:helm
 
-
 - name: Workstation - tools:vscode
   hosts: workstation
   connection: local
@@ -89,6 +88,15 @@
   tags:
     - tools
     - tools:vscode
+
+- name: Workstation - tools:wireguard
+  hosts: workstation
+  connection: local
+  roles:
+    - wireguard
+  tags:
+    - tools
+    - tools:wireguard
 
 - name: Workstation - sw:blender
   hosts: workstation

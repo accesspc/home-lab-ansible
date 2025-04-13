@@ -1,0 +1,40 @@
+---
+
+- name: Apt - wireguard-tools
+  ansible.builtin.apt:
+    name:
+      - iptables
+      - wireguard-tools
+    state: present
+
+- name: Stat - private.key
+  ansible.builtin.stat:
+    path: /etc/wireguard/private.key
+  register: wg_priv_key
+
+- name: Stat - public.key
+  ansible.builtin.stat:
+    path: /etc/wireguard/public.key
+  register: wg_pub_key
+
+- name: Shell - wireguard keys
+  ansible.builtin.shell:
+    chdir: /etc/wireguard
+    cmd: wg genkey | tee private.key | wg pubkey > public.key
+  when: not (wg_priv_key.stat.exists and wg_pub_key.stat.exists)
+
+- name: Shell - read private key
+  ansible.builtin.shell:
+    cmd: cat /etc/wireguard/private.key
+  register: priv_key
+
+- name: Shell - read public key for peer
+  ansible.builtin.shell:
+    cmd: cat /etc/wireguard/{{ wireguard.peer.name }}.key
+  register: peer_pub_key
+
+- name: Template - wg.conf
+  ansible.builtin.template:
+    src: wg.conf.j2
+    dest: /etc/wireguard/{{ wireguard.interface.name }}.conf
+    mode: "0644"

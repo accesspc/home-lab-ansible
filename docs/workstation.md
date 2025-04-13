@@ -70,6 +70,8 @@ apt install -y composer php-cli php-mbstring php-mysql php-xml php-zip
 apt install -y nvidia-cuda-toolkit
 ```
 
+## Fedora leftovers
+
 ```sh
 
 # multimedia

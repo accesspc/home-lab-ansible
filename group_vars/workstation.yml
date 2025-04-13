@@ -24,7 +24,6 @@ common_apt_extra_pkgs:
   - ffmpeg
   - yt-dlp
   # tools
-  - wireguard-tools
   - yamllint
 
 flatpak_pkgs:
@@ -34,10 +33,6 @@ flatpak_pkgs:
   - org.inkscape.Inkscape
   - org.kde.krita
   - org.qbittorrent.qBittorrent
-
-# hashicorp
-hashicorp_pkgs:
-  - terraform
 
 # optional software
 opt:
@@ -51,5 +46,21 @@ blender:
   release: 4.4
   version: 4.4.0
 
+# hashicorp
+hashicorp_pkgs:
+  - terraform
+
+# slack
 slack:
   version: 4.41.105
+
+# wireguard
+wireguard:
+  interface:
+    address: 172.31.255.3/24
+    name: wg0
+  peer:
+    name: aws
+    allowedIPs: 0.0.0.0/0
+    endpoint: 13.41.117.97:51820
+    keepAlive: 25
