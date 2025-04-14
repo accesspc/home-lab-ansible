@@ -1,12 +1,27 @@
 ---
 
-- name: Get_url - slack
-  ansible.builtin.get_url:
-    url: https://downloads.slack-edge.com/desktop-releases/linux/x64/{{ slack.version }}/slack-desktop-{{ slack.version }}-amd64.deb
-    dest: "{{ opt.dir }}/slack-desktop-{{ slack.version }}-amd64.deb"
-    mode: "0644"
-    owner: "{{ opt.uid }}"
+# - name: Get_url - slack
+#   ansible.builtin.get_url:
+#     url: https://downloads.slack-edge.com/desktop-releases/linux/x64/{{ slack.version }}/slack-desktop-{{ slack.version }}-amd64.deb
+#     dest: "{{ opt.dir }}/slack-desktop-{{ slack.version }}-amd64.deb"
+#     mode: "0644"
+#     owner: "{{ opt.uid }}"
 
-- name: Apt - slack
+# - name: Apt - slack
+#   ansible.builtin.apt:
+#     deb: "{{ opt.dir }}/slack-desktop-{{ slack.version }}-amd64.deb"
+
+# /etc/apt/trusted.gpg.d/slack-desktop.gpg
+
+- name: Apt_repository - slack
+  ansible.builtin.apt_repository:
+    repo: deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
+    filename: slack
+    state: present
+    update_cache: true
+
+- name: Apt - slack packages
   ansible.builtin.apt:
-    deb: "{{ opt.dir }}/slack-desktop-{{ slack.version }}-amd64.deb"
+    pkg:
+      - slack-desktop
+    state: present
