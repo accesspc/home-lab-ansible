@@ -29,12 +29,6 @@
     state: present
   when: common_apt_extra_pkgs is defined
 
-# Uninstall snapd
-- name: Apt - snapd
-  ansible.builtin.apt:
-    name: Snapd
-    state: absent
-
 # Cleanup apt
 - name: Apt - remove obsolete packages
   ansible.builtin.apt:
