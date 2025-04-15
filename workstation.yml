@@ -59,7 +59,16 @@
   roles:
     - fw
   tags:
+    - never
     - fw
+
+- name: Workstation - Kubectl
+  hosts: workstation
+  connection: local
+  roles:
+    - kubernetes/apt
+  tags:
+    - k8s
 
 - name: Workstation - tools:blender
   hosts: workstation

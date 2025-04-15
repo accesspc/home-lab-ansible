@@ -57,6 +57,10 @@ fw:
   ip: 172.31.0.1
   mask: 24
 
+# k8s
+k8s_pkgs:
+  - kubectl
+
 # tools:blender
 blender:
   release: 4.4
@@ -65,10 +69,6 @@ blender:
 # tools:hashicorp
 hashicorp_pkgs:
   - terraform
-
-# tools:slack
-slack:
-  version: 4.41.105
 
 # tools:wireguard
 wireguard:

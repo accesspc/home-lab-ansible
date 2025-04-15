@@ -1,0 +1,22 @@
+---
+
+- name: Get_url - kubernetes signing key
+  ansible.builtin.get_url:
+    url: https://pkgs.k8s.io/core:/stable:/{{ k8s_version }}/deb/Release.key
+    dest: /tmp/kubernetes.key
+    mode: "0644"
+
+- name: Shell - gpg dearmor
+  ansible.builtin.shell: cat /tmp/kubernetes.key | gpg --dearmor > /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+- name: Apt_repository - kubernetes
+  ansible.builtin.apt_repository:
+    repo: deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{ k8s_version }}/deb/ /
+    filename: kubernetes
+    state: present
+    update_cache: true
+
+- name: Apt - kubernetes packages
+  ansible.builtin.apt:
+    pkg: "{{ k8s_pkgs }}"
+    state: present
