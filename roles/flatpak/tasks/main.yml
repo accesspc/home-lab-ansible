@@ -1,5 +1,13 @@
 ---
 
+- name: Apt - flatpak discover backend
+  ansible.builtin.apt:
+    pkg:
+      - plasma-discover-backend-flatpak
+    state: present
+
+# flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 - name: Flatpak packages
   community.general.flatpak:
     name: "{{ flatpak_pkgs }}"
