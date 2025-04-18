@@ -1,0 +1,6 @@
+---
+
+- name: Kubectl
+  hosts: microk8s
+  roles:
+    - kubernetes/apt

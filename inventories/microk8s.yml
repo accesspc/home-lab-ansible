@@ -1,0 +1,11 @@
+---
+
+all:
+  hosts:
+    ins13:
+  vars:
+    domain: reiciunas.dev
+
+microk8s:
+  hosts:
+    ins13:
