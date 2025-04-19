@@ -70,15 +70,6 @@
   tags:
     - k8s
 
-- name: Workstation - tools:blender
-  hosts: workstation
-  connection: local
-  roles:
-    - blender
-  tags:
-    - tools
-    - tools:blender
-
 - name: Workstation - tools:docker
   hosts: workstation
   connection: local

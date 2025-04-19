@@ -28,6 +28,7 @@ common_apt_extra_pkgs:
 
 # flatpak
 flatpak_pkgs:
+  - org.blender.Blender
   - org.chromium.Chromium
   - org.darktable.Darktable
   - org.gimp.GIMP
@@ -60,11 +61,6 @@ fw:
 # k8s
 k8s_pkgs:
   - kubectl
-
-# tools:blender
-blender:
-  release: 4.4
-  version: 4.4.0
 
 # tools:hashicorp
 hashicorp_pkgs:
