@@ -11,6 +11,6 @@
 - name: PVE - NFS server
   hosts: nfs
   roles:
-    - common/nfs
+    - nfs
   tags:
     - nfs

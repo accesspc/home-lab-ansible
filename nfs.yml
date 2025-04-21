@@ -1,8 +1,0 @@
----
-
-- name: NFS server
-  hosts: nfs
-  roles:
-    - common/nfs
-  tags:
-    - nfs
