@@ -9,3 +9,7 @@ all:
 microk8s:
   hosts:
     ins13:
+
+nfs:
+  hosts:
+    ins13:

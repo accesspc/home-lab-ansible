@@ -5,16 +5,16 @@ common_apt_extra_pkgs:
 
 nfs:
   - name: postgres
-    net: 192.168.68.0/24
+    net: 192.168.68.0/22
     mode: "0755"
     owner: 999
 
   - name: prometheus
-    net: 192.168.68.0/24
+    net: 192.168.68.0/22
     mode: "0755"
-    owner: nobody
+    owner: 1000
 
   - name: wcac
-    net: 192.168.68.0/24
+    net: 192.168.68.0/22
     mode: "0755"
-    owner: nobody
+    owner: 1000
