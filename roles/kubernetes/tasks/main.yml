@@ -8,6 +8,7 @@
 
 - name: Shell - gpg dearmor
   ansible.builtin.shell: cat /tmp/kubernetes.key | gpg --dearmor > /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  when: "ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'"
 
 - name: Apt_repository - kubernetes
   ansible.builtin.apt_repository:
@@ -15,8 +16,10 @@
     filename: kubernetes
     state: present
     update_cache: true
+  when: "ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'"
 
 - name: Apt - kubernetes packages
   ansible.builtin.apt:
     pkg: "{{ k8s_pkgs }}"
     state: present
+  when: "ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'"
