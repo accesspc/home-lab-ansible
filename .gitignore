@@ -1,4 +1,7 @@
 # sonar scanner
 .scannerwork
 
+# ansible
+/all.yml
+
 .secrets
