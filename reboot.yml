@@ -3,7 +3,7 @@
 - name: Common
   hosts: k8s
   roles:
-    - common/reboot
+    - reboot
   tags:
     - never
     - reboot
