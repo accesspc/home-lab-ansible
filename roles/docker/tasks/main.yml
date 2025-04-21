@@ -1,0 +1,17 @@
+---
+
+- name: Deb
+  ansible.builtin.import_tasks:
+    deb.yml
+  when: "ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'"
+
+- name: Rpm
+  ansible.builtin.import_tasks:
+    rpm.yml
+  when: "ansible_distribution == 'RedHat'"
+
+- name: User - add to docker group
+  user:
+    append: true
+    groups: docker
+    name: "{{ lookup('env', 'USER') }}"
