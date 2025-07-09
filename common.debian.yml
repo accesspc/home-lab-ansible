@@ -8,6 +8,14 @@
     - common
     - user
 
+- name: PVE - APT
+  hosts: pve
+  roles:
+    - pve/apt
+  tags:
+    - pve
+    - apt
+
 - name: Common - APT
   hosts: all
   roles:
