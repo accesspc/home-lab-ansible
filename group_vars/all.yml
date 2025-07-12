@@ -8,6 +8,7 @@ common_apt_pkgs:
   - ca-certificates
   - curl
   - gnupg
+  - lm-sensors
   - ncdu
   - vim-nox
 
