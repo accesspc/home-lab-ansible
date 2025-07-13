@@ -4,4 +4,5 @@ ansible_user: root
 
 # common
 common_apt_extra_pkgs:
+  - prometheus-node-exporter
   - python3-certbot-dns-cloudflare
