@@ -6,6 +6,7 @@ all:
 debian:
   hosts:
     fh01:
+    msi0:
 
 firewall:
   hosts: {}
